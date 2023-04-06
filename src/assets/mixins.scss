@@ -1,0 +1,22 @@
+@mixin button {
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  box-sizing: border-box;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+@mixin disabledButton {
+  &:hover{
+    cursor: not-allowed;
+  }
+}
