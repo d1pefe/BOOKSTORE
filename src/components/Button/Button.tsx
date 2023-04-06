@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import classNames from "classnames";
 
 import styles from "./Button.module.scss";
 
@@ -14,6 +15,7 @@ type ButtonProps = {
   onClick: () => void;
   types: ButtonTypes;
   disabled?: boolean;
+  className?: string;
 };
 
 const btnStyles = {
@@ -23,11 +25,19 @@ const btnStyles = {
   [ButtonTypes.Like]: styles.likeButton,
 };
 
-const Button: FC<ButtonProps> = ({ title, onClick, types, disabled }) => {
+const Button: FC<ButtonProps> = ({ title, onClick, types, disabled, className }) => {
   const buttonClassName = btnStyles[types];
 
   return (
-    <div onClick={onClick} className={buttonClassName}>
+    <div
+      onClick={disabled ? undefined : onClick}
+      className={classNames(buttonClassName, className, {
+        [styles.disabledMainButton]: disabled && types==="Main",
+        [styles.disabledClosingButton]: disabled && types==="Closing",
+        [styles.disabledArrowButton]: disabled && types==="Arrow",
+        [styles.disabledLikeButton]: disabled && types==="Like",
+      })}
+    >
       {title}
     </div>
   );

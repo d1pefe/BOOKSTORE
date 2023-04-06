@@ -1,5 +1,78 @@
 @import "../../assets/colors";
+@import "../../assets/fonts";
+@import "../../assets/mixins";
 
-.button {
+.primaryButton {
+  @include button();
+  padding: 18px 171.25px 14px 171.75px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background-color: $primary;
+  color: $white;
 
+  &:hover {
+    background-color: $primary-2;
+  }
+}
+
+.closingButton {
+  @include button();
+  padding: 16.69px;
+  background-color: $white;
+  color: $primary;
+
+  &:hover {
+    color: $red;
+  }
+}
+
+.arrowButton {
+  @include button();
+  padding: 5px 3px;
+  background-color: $white;
+  color: $primary;
+}
+
+.likeButton {
+  @include button();
+  padding: 20px 20px 19px 19px;
+  background-color: $primary;
+  color: $white;
+
+  &:hover {
+    color: $red;
+  }
+}
+
+.disabledMainButton {
+  @include disabledButton();
+  background-color: $secondary;
+
+  &:hover {
+    background-color: $secondary;
+  }
+}
+
+.disabledClosingButton {
+  @include disabledButton();
+  color: $secondary;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.disabledArrowButton {
+  @include disabledButton();
+}
+
+.disabledLikeButton {
+  @include disabledButton();
+  background-color: $secondary;
+
+  &:hover {
+    color: $white;
+  }
 }
