@@ -28,10 +28,32 @@
   outline: none;
 
   &:focus{
-    border: 2px solid $gray transparent;
+    border: 1px solid $secondary;
   }
 
   &::placeholder{
     color: $secondary;
   }
 }
+
+.disabledInput {
+  background-color: $gray;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.errorInput {
+  border: 1px solid $red;
+}
+.errorText {
+  color: $red;
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  margin: 4px 0;
+}
+

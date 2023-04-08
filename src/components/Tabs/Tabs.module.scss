@@ -1,3 +1,35 @@
 @import "../../assets/colors";
 @import "../../assets/fonts";
-@import "../../assets/mixins";
+
+.container {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid $gray;
+}
+
+.tab {
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-size: 16px;
+  color: $secondary;
+  padding: 0 40px 24px;
+
+  &:hover{
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+.activeTab {
+  box-shadow: 0 2px 0 $primary;
+  color: $primary;
+}
+
+.disabledTab {
+  color: $gray;
+
+  &:hover {
+    color: $gray;
+    cursor: not-allowed;
+  }
+}
