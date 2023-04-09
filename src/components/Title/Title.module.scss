@@ -1,0 +1,11 @@
+@import "../../assets/colors";
+@import "../../assets/fonts";
+
+.title {
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  color: $primary;
+}
