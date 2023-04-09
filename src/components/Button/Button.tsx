@@ -12,7 +12,7 @@ export enum ButtonTypes {
 
 type ButtonProps = {
   title: string | ReactNode;
-  onClick: () => void;
+  onClick: any;
   types: ButtonTypes;
   disabled?: boolean;
   className?: string;
@@ -25,17 +25,23 @@ const btnStyles = {
   [ButtonTypes.Like]: styles.likeButton,
 };
 
-const Button: FC<ButtonProps> = ({ title, onClick, types, disabled, className }) => {
+const Button: FC<ButtonProps> = ({
+  title,
+  onClick,
+  types,
+  disabled,
+  className,
+}) => {
   const buttonClassName = btnStyles[types];
 
   return (
     <div
       onClick={disabled ? undefined : onClick}
       className={classNames(buttonClassName, className, {
-        [styles.disabledMainButton]: disabled && types==="Main",
-        [styles.disabledClosingButton]: disabled && types==="Closing",
-        [styles.disabledArrowButton]: disabled && types==="Arrow",
-        [styles.disabledLikeButton]: disabled && types==="Like",
+        [styles.disabledMainButton]: disabled && types === "Main",
+        [styles.disabledClosingButton]: disabled && types === "Closing",
+        [styles.disabledArrowButton]: disabled && types === "Arrow",
+        [styles.disabledLikeButton]: disabled && types === "Like",
       })}
     >
       {title}
