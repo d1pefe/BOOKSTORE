@@ -1,0 +1,14 @@
+@import "../../assets/colors";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 49px 32px;
+}
+
+hr {
+  height: 1px;
+  width: 1120px;
+  background-color: $gray;
+}
