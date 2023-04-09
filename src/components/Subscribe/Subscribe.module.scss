@@ -1,0 +1,37 @@
+@import "../../assets/colors";
+@import "../../assets/fonts";
+
+.container {
+  background-color: $purple;
+  padding: 56px 64px;
+}
+
+.title {
+  font-size: 40px;
+}
+
+.paragraph {
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: $secondary;
+  margin-bottom: 32px;
+}
+
+.inputContainer {
+  display: flex;
+  height: 56px;
+}
+
+.input {
+  margin-top: 0!important;
+  padding: 16px 646px 16px 24px!important;
+}
+
+.button {
+  font-size: 18px!important;
+  line-height: 24px!important;
+  padding: 16px 40px!important;
+}
