@@ -4,7 +4,7 @@ import classNames from "classnames";
 import styles from "./Input.module.scss";
 
 type InputProps = {
-  title: string;
+  title?: string;
   placeholder: string;
   inputType: string;
   disabled?: boolean;
@@ -31,10 +31,10 @@ const Input: FC<InputProps> = ({
       <p className={styles.inputTitle}>{title}</p>
       <input
         type={inputType}
-        className={classNames(styles.input, {
+        className={classNames(styles.input,{
           [styles.disabledInput]: disabled,
           [styles.errorInput]: errText,
-        })}
+        }, className)}
         placeholder={placeholder}
         disabled={disabled}
         onChange={onChangeText}

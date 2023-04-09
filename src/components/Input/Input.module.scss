@@ -2,30 +2,26 @@
 @import "../../assets/fonts";
 @import "../../assets/mixins";
 
-.inputWrapper {
-  margin: 24px 32px 16px;
-}
-
 .inputTitle {
-  margin: 0 0 4px 0;
   font-family: 'Helios', serif;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 32px;
   color: $primary;
+  margin: 0;
 }
 
 .input{
   font-family: 'Helios', serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 32px;
+  line-height: 22px;
   color: $secondary;
-  padding: 14px 10px;
+  padding: 16px 10px;
   border: 1px solid $gray;
-  width: 480px;
   outline: none;
+  margin: 4px 0 0 0;
 
   &:focus{
     border: 1px solid $secondary;
