@@ -1,0 +1,47 @@
+@import "src/assets/colors";
+@import "src/assets/fonts";
+
+.container {
+  max-width: 352px;
+
+}
+
+.background {
+  background-color: $blue;
+  padding: 1px 63px 1px 63px;
+}
+
+img {
+  height: 264px;
+  width: 226px;
+}
+
+.title {
+  margin: 20px 0 0 0;
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  height: 64px;
+}
+
+.author {
+  margin: 8px 0 0 0 ;
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: 48px;
+  color: $secondary;
+}
+
+.cost {
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+}
