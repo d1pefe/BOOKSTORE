@@ -21,11 +21,10 @@
   @include button();
   padding: 16.69px;
   background-color: $white;
-  color: $primary;
-
-  &:hover {
-    color: $red;
-    fill: $red;
+  &:hover{
+    & > svg > path {
+      fill: $red;
+    }
   }
 }
 

@@ -5,8 +5,10 @@ import Title from "../../components/Title";
 import CardList from "../../components/CardList";
 import Subscribe from "../../components/Subscribe";
 import {CardTypes} from "../../components/Card";
+import Button, {ButtonTypes} from "../../components/Button";
+import {ClosingIcon} from "../../assets/icons";
 
-const cardLists = [
+const MOCK_ARRAY = [
   {
     title: "Designing Across Senses",
     subtitle: "A Multimodal Approach to Product Design",
@@ -85,14 +87,15 @@ const Home = () => {
   const [cardsList, setCardsList] = useState<CardTypes[]>([]);
 
   useEffect(() => {
-    setCardsList(cardLists)
-  }, [cardLists])
+    setCardsList(MOCK_ARRAY)
+  }, [])
 
   return (
     <div className={styles.container}>
       <Title title={"NEW RELEASES BOOKS"} className={styles.title} />
       <CardList cardList={cardsList} />
       <Subscribe className={styles.subscribe}/>
+      <Button title={<ClosingIcon />} onClick={()=>{}} types={ButtonTypes.Closing} />
     </div>
   );
 };

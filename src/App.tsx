@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-
-import Home from "./pages/Main";
+import React from "react";
+import Router from "./pages/Router";
 
 const App = () => {
 
   return (
     <div>
-     <Home />
+     <Router />
     </div>
   );
 };

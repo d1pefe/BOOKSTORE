@@ -8,7 +8,7 @@ type CardListType = {
 }
 
 const CardList: FC<CardListType> = ({cardList}) => {
-    return (
+    return cardList.length > 0 ? (
         <div className={styles.container}>
             {cardList.map((card: any, index) => {
                 return (<Card key={index+"_card"} title={card.title} image={card.image}
@@ -16,7 +16,7 @@ const CardList: FC<CardListType> = ({cardList}) => {
             })}
             <hr/>
         </div>
-    );
+    ): null;
 };
 
 export default CardList;
