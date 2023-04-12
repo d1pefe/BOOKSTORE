@@ -1,0 +1,32 @@
+@import "../../assets/colors";
+
+.container {
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.header {
+  margin-bottom: 72px;
+
+  &Flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .searchInput {
+    padding-right: 348px;
+  }
+
+  .iconsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 52px;
+  }
+
+  hr {
+    margin-top: 23px;
+  }
+}
