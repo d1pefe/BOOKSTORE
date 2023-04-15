@@ -12,7 +12,7 @@ const Header = () => {
     const onClickBurger = () => {
         setOpened(!isOpened);
     };
-    const isLogined = false;
+    const isLoggedIn = false;
     const navigate = useNavigate();
     const onAuthButtonClick = () => {
         navigate(RoutesList.Authorize)
@@ -53,9 +53,9 @@ const Header = () => {
               />
             </div>
             <Button
-              title={isLogined ? "Log Out" : "Log In"}
+              title={isLoggedIn ? "Log Out" : "Log In"}
               types={ButtonTypes.Main}
-              onClick={isLogined ? undefined : onAuthButtonClick}
+              onClick={isLoggedIn ? undefined : onAuthButtonClick}
               className={styles.logButton}
             />
           </div>
@@ -81,7 +81,7 @@ const Header = () => {
               </div>
               <div
                 className={styles.userIcon}
-                onClick={isLogined ? undefined : onAuthButtonClick}
+                onClick={isLoggedIn ? undefined : onAuthButtonClick}
               >
                 <UserIcon />
               </div>

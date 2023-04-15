@@ -1,10 +1,15 @@
 import React from "react";
+import { Provider } from "react-redux";
+
 import Router from "./pages/Router";
+import store from "./redux/store";
 
 const App = () => {
 
   return (
-     <Router />
+    <Provider store={store}>
+        <Router />
+    </Provider>
   );
 };
 
