@@ -19,8 +19,8 @@
 
 .closingButton {
   @include button();
-  padding: 16.69px;
   background-color: $white;
+  width: 56px;
   &:hover{
     & > svg > path {
       fill: $red;

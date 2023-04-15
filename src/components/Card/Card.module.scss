@@ -4,6 +4,10 @@
 .container {
   max-width: 352px;
 
+  @media (max-width: 835px) {
+    max-width: 328px;
+  }
+
 }
 
 .background {

@@ -1,0 +1,114 @@
+@import "../../../assets/colors";
+
+.header {
+  margin-bottom: 72px;
+
+  &Flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+
+.searchInput {
+  padding-right: 348px !important;
+  @media (max-width: 836px) {
+    display: none;
+  }
+}
+
+.iconsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 52px;
+}
+
+hr {
+  margin-top: 23px;
+}
+
+.burgerIcon {
+  display: none !important;
+
+  @media (max-width: 836px) {
+    display: block !important;
+  }
+
+  &:hover {
+    & > svg > path {
+      fill: $primary !important;
+    }
+  }
+}
+
+.likeIcon {
+  @media (max-width: 836px) {
+    display: none;
+  }
+}
+
+.userIcon {
+  @media (max-width: 836px) {
+    display: none;
+  }
+}
+
+.basketIcon {
+  @media (max-width: 836px) {
+    display: none;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.menuWrapper {
+  background-color: $white;
+  width: 368px;
+  z-index: 999;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 22px 41px 56px;
+
+  .menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 412px;
+
+    .searchBurgerInput {
+      margin-top: 36px;
+      width: 287px;
+    }
+
+    .burgerButtonFromIcon {
+      background-color: $white;
+      color: $primary;
+      margin-top: 36px
+    }
+  }
+}
+
+.logButton {
+  padding: 16px 0 16px;
+  position: fixed;
+  bottom: 56px;
+}
+
+.closingIcon {
+  margin-left: 312px;
+  position: relative;
+  right: 0;
+}

@@ -3,30 +3,20 @@
 .container {
   margin: 0 auto;
   max-width: 1120px;
+
+  @media(max-width: 835px) {
+    max-width: 699px;
+  }
 }
 
-.header {
-  margin-bottom: 72px;
-
-  &Flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  .searchInput {
-    padding-right: 348px;
-  }
-
-  .iconsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 52px;
-  }
-
-  hr {
-    margin-top: 23px;
-  }
+.footer {
+  display: flex;
+  margin: 33px 0 33px;
+  justify-content: space-between;
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $secondary;
 }

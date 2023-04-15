@@ -5,10 +5,14 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 49px 32px;
+
+  @media (max-width: 835px) {
+    gap: 30px 32px;
+  }
 }
 
 hr {
   height: 1px;
-  width: 1120px;
+  width: 100%;
   background-color: $gray;
 }

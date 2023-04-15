@@ -1,37 +1,24 @@
-import React, {useState} from "react";
+import React from "react";
 
-import { Outlet } from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import styles from "./PagesContainer.module.scss";
-import {BasketIcon, LikeIcon, ShopIcon, UserIcon} from "../../assets/icons";
-import Input from "../../components/Input";
+import Header from "./Header";
 
 const PagesContainer = () => {
-    const [search,setSearch] = useState("");
-    const onChangeSearch = (value: string) => {
-        return setSearch(value);
-    }
-
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={styles.headerFlex}>
-                    <ShopIcon />
-                    <Input inputType={"text"} placeholder={"Search"} onChange={onChangeSearch} className={styles.searchInput}/>
-                    <div className={styles.iconsContainer}>
-                        <LikeIcon />
-                        <BasketIcon />
-                        <UserIcon />
-                    </div>
-                </div>
-                <hr/>
-            </div>
             <div>
+                <Header/>
+            </div>
+            <div className={styles.outletContainer}>
                 <Outlet/>
             </div>
             <div>
                 <hr/>
-                <div>©2022 Bookstore</div>
-                <div>All rights reserved</div>
+                <div className={styles.footer}>
+                    <div>©2022 Bookstore</div>
+                    <div>All rights reserved</div>
+                </div>
             </div>
         </div>
     );
