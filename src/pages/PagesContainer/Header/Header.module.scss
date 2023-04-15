@@ -13,6 +13,12 @@
 
 .searchInput {
   padding-right: 348px !important;
+  @media (max-width: 1000px) {
+    padding-right: 248px !important;
+  }
+  @media (max-width: 900px) {
+    padding-right: 200px !important;
+  }
   @media (max-width: 836px) {
     display: none;
   }
