@@ -81,7 +81,7 @@ const MOCK_ARRAY = [
   },
 ];
 
-const Home = () => {
+const Main = () => {
   const [cardsList, setCardsList] = useState<CardTypes[]>([]);
 
   useEffect(() => {
@@ -97,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Main;
