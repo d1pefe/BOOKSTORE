@@ -1,19 +1,27 @@
 import React, { FC } from "react";
-import {CardTypes} from "./types";
+import {CardsType} from "./types";
 
 import styles from "./Card.module.scss";
+import {useDispatch} from "react-redux";
+import {setPostVisibility, setSelectedPost} from "../../redux/reducers/postSlice";
 
-const Card: FC<CardTypes> = ({ title, subtitle, isbn13, price, image, url }) => {
-  return (
+const Card: FC<CardsType> = ({ card}) => {
+    const dispatch = useDispatch();
+    const onClickCard = () => {
+        dispatch(setSelectedPost(card));
+        dispatch(setPostVisibility(true));
+    }
+
+    return (
     <div className={styles.container}>
       <div className={styles.background}>
-        <div className={styles.img}>
-          <img src={image} alt={title} />
+        <div className={styles.img} onClick={onClickCard}>
+          <img src={card.image} alt={card.title} />
         </div>
       </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.author}>{subtitle}</div>
-      <div className={styles.cost}>{price}</div>
+      <div className={styles.title} onClick={onClickCard}>{card.title}</div>
+      <div className={styles.author}>{card.subtitle}</div>
+      <div className={styles.cost}>{card.price}</div>
     </div>
   );
 };
