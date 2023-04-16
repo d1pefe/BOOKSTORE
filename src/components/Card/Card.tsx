@@ -4,6 +4,7 @@ import {CardsType} from "./types";
 import styles from "./Card.module.scss";
 import {useDispatch} from "react-redux";
 import {setPostVisibility, setSelectedPost} from "../../redux/reducers/postSlice";
+import {useNavigate} from "react-router-dom";
 
 const Card: FC<CardsType> = ({ card}) => {
     const dispatch = useDispatch();
@@ -12,14 +13,19 @@ const Card: FC<CardsType> = ({ card}) => {
         dispatch(setPostVisibility(true));
     }
 
+    const navigate = useNavigate();
+    const onCardClick = () => {
+        navigate(`/books/${card.isbn13}`)
+    }
+
     return (
     <div className={styles.container}>
       <div className={styles.background}>
-        <div className={styles.img} onClick={onClickCard}>
+        <div className={styles.img} onClick={onCardClick}>
           <img src={card.image} alt={card.title} />
         </div>
       </div>
-      <div className={styles.title} onClick={onClickCard}>{card.title}</div>
+      <div className={styles.title} onClick={onCardClick}>{card.title}</div>
       <div className={styles.author}>{card.subtitle}</div>
       <div className={styles.cost}>{card.price}</div>
     </div>

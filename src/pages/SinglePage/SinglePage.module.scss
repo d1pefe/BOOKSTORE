@@ -1,7 +1,120 @@
-.title {
-  margin-bottom: 48px;
+@import "../../assets/colors";
+@import "../../assets/fonts";
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+
+  .title {
+    margin: 32px 0 48px;
+  }
 }
 
-.subscribe {
-  margin: 72px 0;
+.mainInfoContainer {
+  display: flex;
+  gap: 120px;
+
+  .imageContainer {
+    width: 544px;
+    height: 472px;
+    background-color: $orange;
+    padding: 0;
+    position:relative;
+    display: flex;
+
+    img {
+      margin: auto;
+      width: 350px;
+      height: 400px;
+    }
+
+    & > .buttonLike {
+      position:absolute;
+      top: 0;
+      right: 0;
+
+      &> svg > path {
+        fill: $primary;
+        stroke: $white;
+      }
+    }
+
+    .activeButtonLike > svg > path {
+      fill: $red;
+      stroke: $red;
+    }
+  }
+
+  .infoContainer {
+    .priceContainer{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .infoWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 99px;
+
+      .infoWrapperBlock {
+        display: flex;
+        justify-content: space-between;
+
+        .infoName {
+          font-family: 'Helios', serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 32px;
+          color: $secondary;
+        }
+
+        .info {
+          font-family: 'Helios', serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 32px;
+          color: $primary;
+        }
+      }
+    }
+
+    .preview {
+      font-family: 'Helios', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+  }
+
+  margin-bottom: 72px;
+}
+
+.secondaryInfo {
+  .description {
+    margin: 50px 0 50px;
+  }
+
+  .share {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+  }
+  margin-bottom: 72px;
+}
+
+.similar {
+  margin: 72px 0 82px;
+  .similarTitle {
+     margin-bottom: 48px;
+  }
 }

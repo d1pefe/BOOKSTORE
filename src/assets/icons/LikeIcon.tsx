@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LikeIcon = ({ width = "20", height = "18", stroke="#313037", fill = "#FFFFFF" }) => {
+export const LikeIcon = ({ width = "20", height = "18", stroke="#313037", fill = "none" }) => {
   return (
     <svg
       width={width}

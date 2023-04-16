@@ -4,30 +4,12 @@ import classNames from "classnames";
 import styles from "./Tabs.module.scss";
 
 export enum TabsNames {
-  DESCRIPTION,
-  AUTHORS,
-  REVIEWS,
-  SING_IN,
-  SING_UP,
+    DESCRIPTION,
+    AUTHORS,
+    REVIEWS,
+    SING_IN,
+    SING_UP,
 }
-
-// const TABS_LIST = [
-//   {
-//     key: TabsNames.DESCRIPTION,
-//     title: "Description",
-//     disabled: false,
-//   },
-//   {
-//     key: TabsNames.AUTHORS,
-//     title: "Authors",
-//     disabled: false,
-//   },
-//   {
-//     key: TabsNames.REVIEWS,
-//     title: "Reviews",
-//     disabled: true,
-//   },
-// ];
 
 type TabType = {
   key: TabsNames;

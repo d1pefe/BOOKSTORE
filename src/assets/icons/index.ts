@@ -5,3 +5,6 @@ export { LikeIcon } from "./LikeIcon";
 export { BasketIcon } from "./BasketIcon";
 export { UserIcon } from "./UserIcon";
 export { ArrowLeftIcon } from "./ArrowLeftIcon";
+export { FacebookIcon } from "./FacebookIcon";
+export { TwitterIcon } from "./TwitterIcon";
+export { MoreIcon } from "./MoreIcon";

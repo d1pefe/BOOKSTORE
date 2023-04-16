@@ -37,12 +37,15 @@
 
 .likeButton {
   @include button();
-  padding: 20px 20px 19px 19px;
+  padding: 20px 20px 20px 20px;
   background-color: $primary;
-  color: $white;
+  max-width: 56px;
 
   &:hover {
-    color: $red;
+    & > svg > path {
+      fill: $red;
+      stroke: $red;
+  }
   }
 }
 
