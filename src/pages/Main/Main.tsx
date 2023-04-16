@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Main.module.scss";
 import Title from "../../components/Title";
 import CardList from "../../components/CardList";
 import Subscribe from "../../components/Subscribe";
-import {CardTypes} from "../../components/Card";
+import { CardTypes } from "../../components/Card";
+import SelectedPostModal from "./SelectedPostModal";
 
 const MOCK_ARRAY = [
   {
@@ -85,14 +86,15 @@ const Main = () => {
   const [cardsList, setCardsList] = useState<CardTypes[]>([]);
 
   useEffect(() => {
-    setCardsList(MOCK_ARRAY)
-  }, [])
+    setCardsList(MOCK_ARRAY);
+  }, []);
 
   return (
     <div className={styles.container}>
       <Title title={"NEW RELEASES BOOKS"} className={styles.title} />
       <CardList cardList={cardsList} />
-      <Subscribe className={styles.subscribe}/>
+      <Subscribe className={styles.subscribe} />
+      <SelectedPostModal />
     </div>
   );
 };

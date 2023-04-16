@@ -1,8 +1,12 @@
 export type CardTypes = {
     title: string,
     subtitle: string,
-    isbn13: string,
     price: string,
     image: string,
-    url: string
+    url: string,
+    isbn13: string,
+}
+
+export type CardsType = {
+    card: CardTypes;
 }

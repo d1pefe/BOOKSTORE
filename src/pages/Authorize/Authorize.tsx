@@ -15,7 +15,7 @@ const TABS_LIST = [
   {
     key: TabsNames.SING_UP,
     title: "SING UP",
-    disabled: false,
+    disabled: true,
   },
 ];
 
