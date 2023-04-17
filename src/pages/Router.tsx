@@ -1,10 +1,13 @@
 import React from "react";
 
+import "../FirebaseApp";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PagesContainer from "./PagesContainer";
 import Main from "./Main";
 import Authorize from "./Authorize";
 import SinglePage from "./SinglePage";
+import {useAuth} from "../hooks/useAuth";
 
 export enum RoutesList {
     Main = "/",
@@ -19,7 +22,7 @@ export enum RoutesList {
 }
 
 const Router = () => {
-    // const isLoggedIn = false;
+    const { isLoggedIn } = useAuth();
     return <BrowserRouter>
         <Routes>
             <Route path={RoutesList.Main} element={<PagesContainer/>}>
