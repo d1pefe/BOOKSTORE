@@ -4,7 +4,6 @@ import styles from "./Main.module.scss";
 import Title from "../../components/Title";
 import CardList from "../../components/CardList";
 import Subscribe from "../../components/Subscribe";
-import SelectedPostModal from "./SelectedPostModal";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts, PostSelectors} from "../../redux/reducers/postSlice";
 
@@ -23,7 +22,6 @@ const Main = () => {
       <Title title={"NEW RELEASES BOOKS"} className={styles.title} />
       <CardList cardList={postsList} />
       <Subscribe className={styles.subscribe} />
-      <SelectedPostModal />
     </div>
   );
 };

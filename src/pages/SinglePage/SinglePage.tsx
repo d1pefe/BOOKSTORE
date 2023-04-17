@@ -20,10 +20,10 @@ import {
     getSinglePost,
     PostSelectors,
     setFavoritePost,
-    setFavoritePostStatus, setIdFromSinglePost,
+    setFavoritePostStatus, setSinglePost,
 } from "../../redux/reducers/postSlice";
 import classNames from "classnames";
-import {Navigate, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 
 export type SinglePageTypes = {
     title: string;
@@ -90,14 +90,18 @@ const MOCK_ARRAY = [
 
 const SinglePage = () => {
     const dispatch = useDispatch();
-    const isFavorite = useSelector(PostSelectors.getFavoritePostStatus)
     const params = useParams();
+
+    const isFavorite = useSelector(PostSelectors.getFavoritePostStatus);
 
     const data = useSelector(PostSelectors.getSinglePost);
 
     useEffect(() => {
-        dispatch(setIdFromSinglePost(params?.id))
-    }, [])
+        params.id && dispatch(getSinglePost(params.id));
+        return () => {
+            dispatch(setSinglePost(null));
+        };
+    }, []);
 
     const onLikeClick = () => {
         dispatch(setFavoritePost(data));

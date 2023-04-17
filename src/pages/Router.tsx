@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PagesContainer from "./PagesContainer";
 import Main from "./Main";
 import Authorize from "./Authorize";
@@ -19,7 +19,7 @@ export enum RoutesList {
 }
 
 const Router = () => {
-    const isLoggedIn = false;
+    // const isLoggedIn = false;
     return <BrowserRouter>
         <Routes>
             <Route path={RoutesList.Main} element={<PagesContainer/>}>

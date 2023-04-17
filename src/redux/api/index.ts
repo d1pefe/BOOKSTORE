@@ -9,10 +9,10 @@ const getPosts = () => {
 };
 
 const getPost = (id: string) => {
-    return API.get(`/books/${id}/`)
+    return API.get(`books/${id}`)
 }
 
-
+// eslint-disable-next-line
 export default {
     getPosts,
     getPost
