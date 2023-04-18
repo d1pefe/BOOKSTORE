@@ -24,7 +24,7 @@ export enum RoutesList {
 }
 
 const Router = () => {
-    const {isLoggedIn} = useAuth();
+    const { isLoggedIn } = useAuth();
     return <BrowserRouter>
         <Routes>
             <Route path={RoutesList.Main} element={<PagesContainer/>}>
@@ -33,7 +33,7 @@ const Router = () => {
                 <Route path={RoutesList.Book} element={<SinglePage/>}/>
                 {/*<Route path={RoutesList.Account} element={isLoggedIn ? <Account /> : <Navigate to={RoutesList.SelectedPostModal} />}/>*/}
                 <Route path={RoutesList.Cart} element={isLoggedIn ? <Cart /> : <Navigate to={RoutesList.Authorize} />}/>
-                <Route path={RoutesList.Favorites} element={!isLoggedIn ? <Favorites/> : <Navigate to={RoutesList.Authorize}/>}/>
+                <Route path={RoutesList.Favorites} element={isLoggedIn ? <Favorites/> : <Navigate to={RoutesList.Authorize}/>}/>
                 <Route path={RoutesList.Default} element={<div>404 ERROR</div>}/>
             </Route>
         </Routes>

@@ -24,6 +24,7 @@ import {
 } from "../../redux/reducers/postSlice";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
+import {useAuth} from "../../hooks/useAuth";
 
 export type SinglePageTypes = {
   title: string;
@@ -121,6 +122,8 @@ const SinglePage = () => {
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
 
+    const { isLoggedIn } = useAuth();
+
   return data !== null ? (
     <div className={styles.container}>
       <div className={styles.titleBlock}>
@@ -141,6 +144,7 @@ const SinglePage = () => {
             className={classNames(styles.buttonLike, {
               [styles.activeButtonLike]: favoritesIndex > -1,
             })}
+            disabled={!isLoggedIn}
           />
         </div>
         <div className={styles.infoContainer}>
@@ -170,6 +174,7 @@ const SinglePage = () => {
             title={"ADD TO CART"}
             onClick={onAddToCartButtonClick(true)}
             types={ButtonTypes.Main}
+            disabled={!isLoggedIn}
           />
           <div className={styles.preview}>Preview book</div>
         </div>

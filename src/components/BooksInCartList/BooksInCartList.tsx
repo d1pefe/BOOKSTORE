@@ -4,26 +4,18 @@ import { SinglePageTypes } from "../../pages/SinglePage/SinglePage";
 import styles from "./BooksInCartList.module.scss";
 import { useNavigate } from "react-router-dom";
 import Button, { ButtonTypes } from "../Button";
-import {ClosingIcon} from "../../assets/icons";
-import {PostSelectors} from "../../redux/reducers/postSlice";
-import {useSelector} from "react-redux";
-import classNames from "classnames";
+import { ClosingIcon, MinusIcon, PlusIcon } from "../../assets/icons";
 
 type FavoriteCardTypes = {
-    data: SinglePageTypes;
-    onClick: any;
+  data: SinglePageTypes;
+  onClick: any;
 };
 
-const BooksInCartList: FC<FavoriteCardTypes> = ({ data , onClick}) => {
+const BooksInCartList: FC<FavoriteCardTypes> = ({ data, onClick}) => {
   const navigate = useNavigate();
   const onCardClick = () => {
     navigate(`/books/${data.isbn13}`);
   };
-
-    const favorites = useSelector(PostSelectors.getFavorites);
-    const favoritesIndex = favorites.findIndex(
-        (book) => book.isbn13 === data?.isbn13
-    );
 
   return (
     <>
@@ -38,18 +30,25 @@ const BooksInCartList: FC<FavoriteCardTypes> = ({ data , onClick}) => {
             {data.title}
           </div>
           <div className={styles.author}>{data.subtitle}</div>
+          <div className={styles.counter}>
+            <div>
+              <MinusIcon />
+            </div>
+            <div>1</div>
+            <div>
+              <PlusIcon />
+            </div>
+          </div>
         </div>
-          <div className={styles.cost}>{data.price}</div>
+        <div className={styles.cost}>{data.price}</div>
         <Button
           title={<ClosingIcon />}
           onClick={onClick}
           types={ButtonTypes.Closing}
-          className={classNames(styles.buttonClosing, {
-              [styles.activeButtonClosing]: favoritesIndex > -1,
-          })}
+          className={styles.buttonClosing}
         />
       </div>
-      <hr className={styles.hr}/>
+      <hr className={styles.hr} />
     </>
   );
 };
