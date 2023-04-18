@@ -20,6 +20,9 @@ const Header = () => {
     const onHeadButtonClick = () => {
         navigate(RoutesList.Main)
     }
+    const onLikeButtonClick = () => {
+        navigate(RoutesList.Favorites)
+    }
 
     return (
       <>
@@ -73,7 +76,7 @@ const Header = () => {
               className={styles.searchInput}
             />
             <div className={styles.iconsContainer}>
-              <div className={styles.likeIcon}>
+              <div className={styles.likeIcon} onClick={onLikeButtonClick}>
                 <LikeIcon />
               </div>
               <div className={styles.basketIcon}>

@@ -5,23 +5,15 @@ import { CardTypes } from "../../components/Card";
 import { SinglePageTypes } from "../../pages/SinglePage/SinglePage";
 
 type InitialType = {
-  selectedPost: CardTypes | null;
-  isVisibleSelectedModal: boolean;
-  favoritePost: SinglePageTypes | null;
-  isFavoritePost: boolean;
   postsList: CardTypes[];
-  idFromUrl: string | undefined;
   singlePost: SinglePageTypes | null;
+  favoritePosts: SinglePageTypes[];
 };
 
 const initialState: InitialType = {
-  selectedPost: null,
-  isVisibleSelectedModal: false,
-  favoritePost: null,
-  isFavoritePost: false,
   postsList: [],
-  idFromUrl: undefined,
   singlePost: null,
+  favoritePosts: [],
 };
 
 const postSlice = createSlice({
@@ -32,15 +24,25 @@ const postSlice = createSlice({
     setAllPosts: (state, action: PayloadAction<CardTypes[]>) => {
       state.postsList = action.payload;
     },
-    setFavoritePost: (state, action: PayloadAction<SinglePageTypes | null>) => {
-      state.favoritePost = action.payload;
-    },
-    setFavoritePostStatus: (state, action: PayloadAction<boolean>) => {
-      state.isFavoritePost = action.payload;
-    },
     getSinglePost: (_, __: PayloadAction<string>) => {},
     setSinglePost: (state, action: PayloadAction<SinglePageTypes | null>) => {
       state.singlePost = action.payload;
+    },
+    setStatus: (
+      state,
+      action: PayloadAction<{ status: boolean; card: SinglePageTypes | null }>
+    ) => {
+      const { card } = action.payload;
+
+      const favoritesIndex = state.favoritePosts.findIndex(
+        (book) => book.isbn13 === card?.isbn13
+      );
+
+      if (favoritesIndex === -1 && card) {
+        state.favoritePosts.push(card);
+      } else {
+        state.favoritePosts.splice(favoritesIndex, 1);
+      }
     },
   },
 });
@@ -48,17 +50,15 @@ const postSlice = createSlice({
 export const {
   getAllPosts,
   setAllPosts,
-  setFavoritePost,
-  setFavoritePostStatus,
   getSinglePost,
   setSinglePost,
+  setStatus,
 } = postSlice.actions;
 
 export default postSlice.reducer;
 
 export const PostSelectors = {
-  getFavoritePostStatus: (state: RootState) => state.posts.isFavoritePost,
-  // getFavoritesPost: (state: RootState) => state.posts.favoritePost, TODO customize your favorites page
   getAllPosts: (state: RootState) => state.posts.postsList,
   getSinglePost: (state: RootState) => state.posts.singlePost,
+  getFavorites: (state: RootState) => state.posts.favoritePosts,
 };
