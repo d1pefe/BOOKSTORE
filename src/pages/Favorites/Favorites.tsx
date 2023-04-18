@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Favorites.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import {PostSelectors, setStatus} from "../../redux/reducers/postSlice";
+import {PostSelectors, setFavoriteStatus} from "../../redux/reducers/postSlice";
 import FavoriteCard from "../../components/FavoriteCard";
 
 const Favorites = () => {
@@ -17,7 +17,7 @@ const Favorites = () => {
             const onLikeClick =
                 (status: boolean, card = data) =>
                     () => {
-                        dispatch(setStatus({ status, card }));
+                        dispatch(setFavoriteStatus({ status, card }));
                     };
 
             return (

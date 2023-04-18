@@ -1,0 +1,68 @@
+@import "src/assets/colors";
+@import "src/assets/fonts";
+
+.container {
+  padding: 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:first-child {
+    padding: 0;
+  }
+}
+
+.background {
+  max-width: 352px;
+  background-color: $blue;
+
+  @media (max-width: 835px) {
+    max-width: 328px;
+} }
+
+img {
+  height: 264px;
+  width: 226px;
+  margin: 1px 63px 1px 63px;
+}
+
+.title {
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  height: 64px;
+}
+
+.author {
+  font-family: 'Helios', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: 48px;
+  color: $secondary;
+}
+
+.cost {
+  font-family: 'Bebas Neue', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+
+}
+
+.buttonClosing {
+  background-color: $white;
+  height: 56px;
+}
+
+.activeButtonClosing > svg > path {
+  fill: $red;
+  stroke: $red;
+}
+
+.hr:last-child {
+  display: none;
+}

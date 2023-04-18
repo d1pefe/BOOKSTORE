@@ -23,6 +23,9 @@ const Header = () => {
     const onLikeButtonClick = () => {
         navigate(RoutesList.Favorites)
     }
+    const onCartButtonClick = () => {
+        navigate(RoutesList.Cart)
+    }
 
     return (
       <>
@@ -79,7 +82,7 @@ const Header = () => {
               <div className={styles.likeIcon} onClick={onLikeButtonClick}>
                 <LikeIcon />
               </div>
-              <div className={styles.basketIcon}>
+              <div className={styles.basketIcon} onClick={onCartButtonClick}>
                 <BasketIcon />
               </div>
               <div

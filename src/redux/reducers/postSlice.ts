@@ -8,12 +8,14 @@ type InitialType = {
   postsList: CardTypes[];
   singlePost: SinglePageTypes | null;
   favoritePosts: SinglePageTypes[];
+  cartPosts: SinglePageTypes[];
 };
 
 const initialState: InitialType = {
   postsList: [],
   singlePost: null,
   favoritePosts: [],
+  cartPosts: [],
 };
 
 const postSlice = createSlice({
@@ -28,7 +30,7 @@ const postSlice = createSlice({
     setSinglePost: (state, action: PayloadAction<SinglePageTypes | null>) => {
       state.singlePost = action.payload;
     },
-    setStatus: (
+    setFavoriteStatus: (
       state,
       action: PayloadAction<{ status: boolean; card: SinglePageTypes | null }>
     ) => {
@@ -44,6 +46,30 @@ const postSlice = createSlice({
         state.favoritePosts.splice(favoritesIndex, 1);
       }
     },
+    setCartStatus: (
+      state,
+      action: PayloadAction<{
+        status: boolean;
+        count: number;
+        card: SinglePageTypes | null;
+      }>
+    ) => {
+      const { card, count } = action.payload;
+
+      const cartIndex = state.cartPosts.findIndex(
+        (book) => book.isbn13 === card?.isbn13
+      );
+
+      if (cartIndex === -1 && card) {
+        state.cartPosts.push(card);
+      } else {
+        state.cartPosts.splice(cartIndex, 1);
+      }
+
+      if (count === 0 && count < 0) {
+          state.cartPosts.splice(cartIndex, 1)
+      }
+    },
   },
 });
 
@@ -52,7 +78,8 @@ export const {
   setAllPosts,
   getSinglePost,
   setSinglePost,
-  setStatus,
+  setFavoriteStatus,
+    setCartStatus
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -61,4 +88,5 @@ export const PostSelectors = {
   getAllPosts: (state: RootState) => state.posts.postsList,
   getSinglePost: (state: RootState) => state.posts.singlePost,
   getFavorites: (state: RootState) => state.posts.favoritePosts,
+  getCart: (state: RootState) => state.posts.cartPosts,
 };

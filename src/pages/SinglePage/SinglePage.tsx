@@ -17,10 +17,10 @@ import Subscribe from "../../components/Subscribe";
 import CardList from "../../components/CardList";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getSinglePost,
-  PostSelectors,
-  setSinglePost,
-  setStatus,
+    getSinglePost,
+    PostSelectors, setCartStatus,
+    setFavoriteStatus,
+    setSinglePost,
 } from "../../redux/reducers/postSlice";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
@@ -92,7 +92,7 @@ const SinglePage = () => {
   const params = useParams();
 
   const data = useSelector(PostSelectors.getSinglePost);
-
+  const test =  useSelector(PostSelectors.getCart)
   useEffect(() => {
     params.id && dispatch(getSinglePost(params.id));
     return () => {
@@ -108,8 +108,15 @@ const SinglePage = () => {
   const onLikeClick =
     (status: boolean, card = data) =>
     () => {
-      dispatch(setStatus({ status, card }));
+      dispatch(setFavoriteStatus({ status, card }));
     };
+
+    const onAddToCartButtonClick =
+        (status:boolean, count = 1 ,card = data) =>
+            () => {
+                dispatch(setCartStatus({ status, count ,card }));
+                console.log(test)
+            };
 
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
@@ -161,7 +168,7 @@ const SinglePage = () => {
           </div>
           <Button
             title={"ADD TO CART"}
-            onClick={() => {}}
+            onClick={onAddToCartButtonClick(true)}
             types={ButtonTypes.Main}
           />
           <div className={styles.preview}>Preview book</div>
