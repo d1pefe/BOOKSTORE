@@ -2,10 +2,10 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 
 type InitialType = {
-    name: string | null,
-    email: string | null,
-    token: string | null,
-    id: string | null
+  name: string | null;
+  email: string | null;
+  token: string | null;
+  id: string | null;
 };
 
 const initialState: InitialType = {

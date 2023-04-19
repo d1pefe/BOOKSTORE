@@ -36,6 +36,9 @@
 
       &> svg > path {
         stroke: $white;
+        &:hover {
+          stroke: $red !important;
+        }
       }
     }
 

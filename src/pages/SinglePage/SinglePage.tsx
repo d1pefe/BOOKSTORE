@@ -93,7 +93,6 @@ const SinglePage = () => {
   const params = useParams();
 
   const data = useSelector(PostSelectors.getSinglePost);
-  const test =  useSelector(PostSelectors.getCart)
   useEffect(() => {
     params.id && dispatch(getSinglePost(params.id));
     return () => {
@@ -113,10 +112,9 @@ const SinglePage = () => {
     };
 
     const onAddToCartButtonClick =
-        (status:boolean, count = 1 ,card = data) =>
+        (count = 1 ,card = data) =>
             () => {
-                dispatch(setCartStatus({ status, count ,card }));
-                console.log(test)
+                dispatch(setCartStatus({count ,card }));
             };
 
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
@@ -172,7 +170,7 @@ const SinglePage = () => {
           </div>
           <Button
             title={"ADD TO CART"}
-            onClick={onAddToCartButtonClick(true)}
+            onClick={onAddToCartButtonClick(1, data)}
             types={ButtonTypes.Main}
             disabled={!isLoggedIn}
           />

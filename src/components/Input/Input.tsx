@@ -11,6 +11,7 @@ type InputProps = {
   errText?: string;
   className?: string;
   onChange: (value: string) => void;
+  value?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -21,6 +22,7 @@ const Input: FC<InputProps> = ({
   errText,
   className,
   onChange,
+    value
 }) => {
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -38,6 +40,7 @@ const Input: FC<InputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         onChange={onChangeText}
+        value={value}
       />
       {errText && <p className={styles.errorText}>{errText}</p>}
     </div>

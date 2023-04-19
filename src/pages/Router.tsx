@@ -10,6 +10,8 @@ import SinglePage from "./SinglePage";
 import {useAuth} from "../hooks/useAuth";
 import Favorites from "./Favorites";
 import Cart from "./Cart";
+import Search from "./Search";
+import EmptyState from "../components/EmptyState";
 
 export enum RoutesList {
     Main = "/",
@@ -32,9 +34,10 @@ const Router = () => {
                 <Route path={RoutesList.Authorize} element={<Authorize/>}/>
                 <Route path={RoutesList.Book} element={<SinglePage/>}/>
                 {/*<Route path={RoutesList.Account} element={isLoggedIn ? <Account /> : <Navigate to={RoutesList.SelectedPostModal} />}/>*/}
+                <Route path={RoutesList.Search} element={<Search/>}/>
                 <Route path={RoutesList.Cart} element={isLoggedIn ? <Cart /> : <Navigate to={RoutesList.Authorize} />}/>
                 <Route path={RoutesList.Favorites} element={isLoggedIn ? <Favorites/> : <Navigate to={RoutesList.Authorize}/>}/>
-                <Route path={RoutesList.Default} element={<div>404 ERROR</div>}/>
+                <Route path={RoutesList.Default} element={<EmptyState/>}/>
             </Route>
         </Routes>
     </BrowserRouter>;

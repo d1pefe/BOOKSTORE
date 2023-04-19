@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postReduces from "./reducers/postSlice";
 import userReducer from "./reducers/userSlice";
+import searchReduces from "./reducers/userSlice";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/rootSaga";
 

@@ -1,13 +1,23 @@
 import React, {useState} from "react";
 
 import styles from "./Header.module.scss";
-import {BasketIcon, BurgerIcon, ClosingIcon, LikeIcon, ShopIcon, UserIcon,} from "../../../assets/icons";
+import {
+    BasketIcon,
+    BurgerIcon,
+    ClosingIcon,
+    LikeIcon, SearchIcon,
+    ShopIcon,
+    UserIcon,
+} from "../../../assets/icons";
 import Input from "../../../components/Input";
 import Button, {ButtonTypes} from "../../../components/Button";
 import {useNavigate} from "react-router-dom";
 import {RoutesList} from "../../Router";
+import {getSearchedPosts, setSearchedValue} from "../../../redux/reducers/postSlice";
+import {useDispatch} from "react-redux";
 
 const Header = () => {
+    const dispatch = useDispatch();
     const [isOpened, setOpened] = useState(false);
     const onClickBurger = () => {
         setOpened(!isOpened);
@@ -15,93 +25,110 @@ const Header = () => {
     const isLoggedIn = false;
     const navigate = useNavigate();
     const onAuthButtonClick = () => {
-        navigate(RoutesList.Authorize)
+        navigate(RoutesList.Authorize);
     };
     const onHeadButtonClick = () => {
-        navigate(RoutesList.Main)
-    }
+        navigate(RoutesList.Main);
+    };
     const onLikeButtonClick = () => {
-        navigate(RoutesList.Favorites)
-    }
+        navigate(RoutesList.Favorites);
+    };
     const onCartButtonClick = () => {
-        navigate(RoutesList.Cart)
+        navigate(RoutesList.Cart);
+    };
+
+    const [searchText, setSearchText] = useState("");
+
+    const onSearchButtonClick = () => {
+        dispatch(setSearchedValue(searchText));
+        navigate(RoutesList.Search)
     }
 
     return (
-      <>
-        {isOpened && (
-          <div className={styles.menuWrapper}>
-            <Button
-              title={<ClosingIcon />}
-              onClick={onClickBurger}
-              types={ButtonTypes.Closing}
-              className={styles.closingIcon}
-            />
-            <hr />
-            <div className={styles.menuContainer}>
-              <Input
-                inputType={"text"}
-                placeholder={"Search"}
-                onChange={() => {}}
-                className={styles.searchBurgerInput}
-              />
-              <Button
-                title={"FAVORITES"}
-                types={ButtonTypes.Main}
-                onClick={() => {}}
-                className={styles.burgerButtonFromIcon}
-              />
-              <Button
-                title={"CART"}
-                types={ButtonTypes.Main}
-                onClick={() => {}}
-                className={styles.burgerButtonFromIcon}
-              />
+        <>
+            {isOpened && (
+                <div className={styles.menuWrapper}>
+                    <Button
+                        title={<ClosingIcon/>}
+                        onClick={onClickBurger}
+                        types={ButtonTypes.Closing}
+                        className={styles.closingIcon}
+                    />
+                    <hr/>
+                    <div className={styles.menuContainer}>
+                        <Input
+                            value={searchText}
+                            inputType={"text"}
+                            placeholder={"Search"}
+                            onChange={setSearchText}
+                            className={styles.searchBurgerInput}
+                        />
+                        <div onClick={onSearchButtonClick}>
+                            <SearchIcon />
+                        </div>
+                        <Button
+                            title={"FAVORITES"}
+                            types={ButtonTypes.Main}
+                            onClick={() => {
+                            }}
+                            className={styles.burgerButtonFromIcon}
+                        />
+                        <Button
+                            title={"CART"}
+                            types={ButtonTypes.Main}
+                            onClick={() => {
+                            }}
+                            className={styles.burgerButtonFromIcon}
+                        />
+                    </div>
+                    <Button
+                        title={isLoggedIn ? "Log Out" : "Log In"}
+                        types={ButtonTypes.Main}
+                        onClick={isLoggedIn ? undefined : onAuthButtonClick}
+                        className={styles.logButton}
+                    />
+                </div>
+            )}
+            {isOpened && <div className={styles.overlay}></div>}
+            <div className={styles.header}>
+                <div className={styles.headerFlex}>
+                    <div onClick={onHeadButtonClick}>
+                        <ShopIcon/>
+                    </div>
+                    <Input
+                        value={searchText}
+                        inputType={"text"}
+                        placeholder={"Search"}
+                        onChange={setSearchText}
+                        className={styles.searchInput}
+                    />
+                    <div onClick={onSearchButtonClick}>
+                        <SearchIcon />
+                    </div>
+                    <div className={styles.iconsContainer}>
+                        <div className={styles.likeIcon} onClick={onLikeButtonClick}>
+                            <LikeIcon/>
+                        </div>
+                        <div className={styles.basketIcon} onClick={onCartButtonClick}>
+                            <BasketIcon/>
+                        </div>
+                        <div
+                            className={styles.userIcon}
+                            onClick={isLoggedIn ? undefined : onAuthButtonClick}
+                        >
+                            <UserIcon/>
+                        </div>
+                        <Button
+                            title={<BurgerIcon/>}
+                            onClick={onClickBurger}
+                            types={ButtonTypes.Closing}
+                            className={styles.burgerIcon}
+                        />
+                    </div>
+                </div>
+                <hr/>
             </div>
-            <Button
-              title={isLoggedIn ? "Log Out" : "Log In"}
-              types={ButtonTypes.Main}
-              onClick={isLoggedIn ? undefined : onAuthButtonClick}
-              className={styles.logButton}
-            />
-          </div>
-        )}
-        {isOpened && <div className={styles.overlay}></div>}
-        <div className={styles.header}>
-          <div className={styles.headerFlex}>
-            <div onClick={onHeadButtonClick}>
-              <ShopIcon />
-            </div>
-            <Input
-              inputType={"text"}
-              placeholder={"Search"}
-              onChange={() => {}}
-              className={styles.searchInput}
-            />
-            <div className={styles.iconsContainer}>
-              <div className={styles.likeIcon} onClick={onLikeButtonClick}>
-                <LikeIcon />
-              </div>
-              <div className={styles.basketIcon} onClick={onCartButtonClick}>
-                <BasketIcon />
-              </div>
-              <div
-                className={styles.userIcon}
-                onClick={isLoggedIn ? undefined : onAuthButtonClick}
-              >
-                <UserIcon />
-              </div>
-              <Button
-                title={<BurgerIcon />}
-                onClick={onClickBurger}
-                types={ButtonTypes.Closing}
-                className={styles.burgerIcon}
-              />
-            </div>
-          </div>
-          <hr />
-        </div>
-      </>
+        </>
     );
 };
 

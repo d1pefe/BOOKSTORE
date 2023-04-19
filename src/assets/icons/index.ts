@@ -10,3 +10,4 @@ export { TwitterIcon } from "./TwitterIcon";
 export { MoreIcon } from "./MoreIcon";
 export { MinusIcon } from "./MinusIcon";
 export { PlusIcon } from "./PlusIcon";
+export { SearchIcon } from "./SearchIcon";

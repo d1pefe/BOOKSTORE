@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
 import styles from "./Authorize.module.scss";
 import Tabs from "../../components/Tabs";
@@ -6,8 +6,12 @@ import { TabsNames } from "../../components/Tabs/Tabs";
 import Input from "../../components/Input";
 import Button, { ButtonTypes } from "../../components/Button";
 import { useDispatch } from "react-redux";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import {setUser} from "../../redux/reducers/userSlice";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { setUser } from "../../redux/reducers/userSlice";
 
 const TABS_LIST = [
   {
@@ -30,33 +34,55 @@ const Authorize = () => {
   const onEmailChange = (e: string) => setEmail(e);
   const [pass, setPass] = useState("");
   const onPassChange = (e: string) => setPass(e);
+  const [confPass, setConfPass] = useState("");
+  const onConfPassChange = (e: string) => setConfPass(e);
   const [name, setName] = useState("");
   const onNameChange = (e: string) => setName(e);
+  const [nameError, setNameError] = useState("")
 
   const dispatch = useDispatch();
 
-  const handleLogin = ( email: string, password: string ) => {
+  const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password).then(({user}) => {
-        dispatch(setUser({
-            email: user.email,
-            id: user.uid,
-            token: user.refreshToken,
-        }))
-    })
+    signInWithEmailAndPassword(auth, email, password).then(({ user }) => {
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.refreshToken,
+        })
+      );
+    });
   };
 
-    const handleSingUp = ( email: string, password: string ) => {
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password).then(({user}) => {
-            console.log(user);
-            dispatch(setUser({
-                email: user.email,
-                id: user.uid,
-                token: user.refreshToken,
-            }))
+  const handleSingUp = (email: string, password: string) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password).then(({ user }) => {
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.refreshToken,
         })
-    };
+      );
+      setActiveTab(TabsNames.SING_IN);
+    });
+    onNameChange("");
+    onPassChange("");
+    onEmailChange("");
+  };
+
+  useEffect(()=>{
+      if(name.length === 0 && name.length <= 3 ) {
+          setNameError("Name is required field")
+      } else {
+          setNameError("")
+      }
+  }, [name])
+
+  const isValidSingUp = useMemo(() => {
+    return nameError.length === 0
+  }, [nameError, name]);
 
   const getAuthorizeForm = () => {
     switch (activeTab) {
@@ -89,6 +115,7 @@ const Authorize = () => {
               onChange={onNameChange}
               title={"Name"}
               className={styles.input}
+              errText={nameError}
             />
             <Input
               placeholder={"Your email"}
@@ -107,7 +134,7 @@ const Authorize = () => {
             <Input
               placeholder={"Confirm your password"}
               inputType={"password"}
-              onChange={onPassChange}
+              onChange={onConfPassChange}
               title={"Confirm password"}
               className={styles.input}
             />
@@ -128,7 +155,12 @@ const Authorize = () => {
         {getAuthorizeForm()}
         <Button
           title={activeTab === TabsNames.SING_IN ? "SING IN" : "SING UP"}
-          onClick={activeTab === TabsNames.SING_IN ? () => handleLogin(email, pass) : () => handleSingUp(email, pass)}
+          onClick={
+            activeTab === TabsNames.SING_IN
+              ? () => handleLogin(email, pass)
+              : () => handleSingUp(email, pass)
+          }
+          // disabled={!isValidSingUp}
           types={ButtonTypes.Main}
           className={styles.button}
         />
