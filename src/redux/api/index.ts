@@ -12,11 +12,10 @@ const getPost = (id: string) => {
     return API.get(`books/${id}`)
 }
 
-const getSearchList = (query? : string, page?: number) => {
-  return API.get(`/search/${query}/${page}`);
+const getSearchList = (query? : string) => {
+  return API.get(`/search/${query}`);
 }
 
-// eslint-disable-next-line
 export default {
     getPosts,
     getPost,

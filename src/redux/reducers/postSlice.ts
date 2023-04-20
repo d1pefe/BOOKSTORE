@@ -11,13 +11,7 @@ type InitialType = {
     cartPosts: SinglePageTypes[];
     searchValue: string | null;
     searchedPosts: CardTypes[];
-    postsCount: number;
 };
-
-export type GetSearchedPostsPayload = {
-    query : string;
-    page: number;
-}
 
 const initialState: InitialType = {
     postsList: [],
@@ -26,7 +20,6 @@ const initialState: InitialType = {
     cartPosts: [],
     searchValue: null,
     searchedPosts: [],
-    postsCount: 0,
 };
 
 const postSlice = createSlice({
@@ -82,13 +75,13 @@ const postSlice = createSlice({
                 state.cartPosts.splice(cartIndex, 1)
             }
         },
-        getSearchedPosts: (_, __: PayloadAction<GetSearchedPostsPayload>) => {
+        getSearchedPosts: (_, __: PayloadAction<string>) => {
         },
         setSearchedValue: (state, action: PayloadAction<string>) => {
             state.searchValue = action.payload;
         },
-        setSearchedPosts: (state, action: PayloadAction<{ cardList: CardTypes,  postsCount: number}>) => {
-            state.searchedPosts = action.payload.cardList;
+        setSearchedPosts: (state, action: PayloadAction<CardTypes[]>) => {
+            state.searchedPosts = action.payload;
         },
     },
 });
