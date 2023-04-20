@@ -18,13 +18,14 @@ import CardList from "../../components/CardList";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getSinglePost,
-    PostSelectors, setCartStatus,
+    PostSelectors,
     setFavoriteStatus,
     setSinglePost,
 } from "../../redux/reducers/postSlice";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
 import {useAuth} from "../../hooks/useAuth";
+import {addToCart} from "../../redux/reducers/cartSlice";
 
 export type SinglePageTypes = {
   title: string;
@@ -112,10 +113,12 @@ const SinglePage = () => {
     };
 
     const onAddToCartButtonClick =
-        (count = 1 ,card = data) =>
+        () =>
             () => {
-                dispatch(setCartStatus({count ,card }));
-            };
+                if (data) {
+                    dispatch(addToCart({ data }));
+                }
+             };
 
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
@@ -170,7 +173,7 @@ const SinglePage = () => {
           </div>
           <Button
             title={"ADD TO CART"}
-            onClick={onAddToCartButtonClick(1, data)}
+            onClick={onAddToCartButtonClick()}
             types={ButtonTypes.Main}
             disabled={!isLoggedIn}
           />

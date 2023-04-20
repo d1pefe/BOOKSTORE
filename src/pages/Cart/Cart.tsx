@@ -1,25 +1,18 @@
 import React from "react";
 
 import styles from "./Cart.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { PostSelectors, setCartStatus } from "../../redux/reducers/postSlice";
+import {useSelector } from "react-redux";
 import BooksInCartList from "../../components/BooksInCartList";
-import {SinglePageTypes} from "../SinglePage/SinglePage";
+import {CartSelectors} from "../../redux/reducers/cartSlice";
 
 const Cart = () => {
-  const dispatch = useDispatch();
-
-  const cartList = useSelector(PostSelectors.getCart);
-  console.log(cartList)
+  const cartList = useSelector(CartSelectors.getCart);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {cartList.map((card, count) => {
-            return (
-            <BooksInCartList data={card} count={count}
-            />
-          );
+        {cartList.map(({ count, data }) => {
+          return <BooksInCartList data={data} count={count} />;
         })}
       </div>
     </div>

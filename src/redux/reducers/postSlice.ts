@@ -8,7 +8,6 @@ type InitialType = {
     postsList: CardTypes[];
     singlePost: SinglePageTypes | null;
     favoritePosts: SinglePageTypes[];
-    cartPosts: SinglePageTypes[];
     searchValue: string | null;
     searchedPosts: CardTypes[];
     postCounter: number;
@@ -28,7 +27,6 @@ const initialState: InitialType = {
     postsList: [],
     singlePost: null,
     favoritePosts: [],
-    cartPosts: [],
     searchValue: null,
     searchedPosts: [],
     postCounter: 1,
@@ -62,29 +60,6 @@ const postSlice = createSlice({
         state.favoritePosts.splice(favoritesIndex, 1);
       }
     },
-    setCartStatus: (
-      state,
-      action: PayloadAction<{
-        count: number;
-        card: SinglePageTypes | null;
-      }>
-    ) => {
-      const { card, count } = action.payload;
-
-      const cartIndex = state.cartPosts.findIndex(
-        (book) => book.isbn13 === card?.isbn13
-      );
-
-      if (cartIndex === -1 && card) {
-        state.cartPosts.push(card);
-      } else {
-        state.cartPosts.splice(cartIndex, 1);
-      }
-
-      if (count === 0 && count < 0) {
-        state.cartPosts.splice(cartIndex, 1);
-      }
-    },
     getSearchedPosts: (_, __: PayloadAction<GetSeachedPostsPayload>) => {},
     setSearchedValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
@@ -107,7 +82,6 @@ export const {
     getSinglePost,
     setSinglePost,
     setFavoriteStatus,
-    setCartStatus,
     getSearchedPosts,
     setSearchedPosts,
     setSearchedValue
@@ -119,7 +93,6 @@ export const PostSelectors = {
     getAllPosts: (state: RootState) => state.posts.postsList,
     getSinglePost: (state: RootState) => state.posts.singlePost,
     getFavorites: (state: RootState) => state.posts.favoritePosts,
-    getCart: (state: RootState) => state.posts.cartPosts,
     getSearchedValue: (state: RootState) => state.posts.searchValue,
     getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
     getSearchedPostsCount: (state: RootState) => state.posts.postCounter,

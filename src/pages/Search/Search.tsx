@@ -23,7 +23,7 @@ const Search = () => {
     const pagesCount = Math.ceil(postsCount / 10);
 
     useEffect(() => {
-        const page = 10 * (currentPage - 1);
+        const page = currentPage;
         if (query !== null) {
             dispatch(getSearchedPosts({page, query}));
         }
@@ -37,7 +37,7 @@ const Search = () => {
 
     return (
         <div className={styles.container}>
-            <Title title={` '${query}' Search results`} className={styles.title}/>
+            <Title title={`'${query}' Search results`} className={styles.title}/>
             {searchedPosts.length>0 ?
                 <div>
                     <CardList cardList={searchedPosts}/>
