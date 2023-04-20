@@ -11,7 +11,18 @@ type InitialType = {
     cartPosts: SinglePageTypes[];
     searchValue: string | null;
     searchedPosts: CardTypes[];
+    postCounter: number;
 };
+
+export type GetSeachedPostsPayload = {
+    page: number,
+    query: string,
+}
+
+export type SetSearchedPostsPayload = {
+    cardList: CardTypes[],
+    postCounter: number
+}
 
 const initialState: InitialType = {
     postsList: [],
@@ -20,70 +31,74 @@ const initialState: InitialType = {
     cartPosts: [],
     searchValue: null,
     searchedPosts: [],
+    postCounter: 1,
 };
 
 const postSlice = createSlice({
-    name: "selected post",
-    initialState,
-    reducers: {
-        getAllPosts: (_, __: PayloadAction<undefined>) => {
-        },
-        setAllPosts: (state, action: PayloadAction<CardTypes[]>) => {
-            state.postsList = action.payload;
-        },
-        getSinglePost: (_, __: PayloadAction<string>) => {
-        },
-        setSinglePost: (state, action: PayloadAction<SinglePageTypes | null>) => {
-            state.singlePost = action.payload;
-        },
-        setFavoriteStatus: (
-            state,
-            action: PayloadAction<{ status: boolean; card: SinglePageTypes | null }>
-        ) => {
-            const {card} = action.payload;
-
-            const favoritesIndex = state.favoritePosts.findIndex(
-                (book) => book.isbn13 === card?.isbn13
-            );
-
-            if (favoritesIndex === -1 && card) {
-                state.favoritePosts.push(card);
-            } else {
-                state.favoritePosts.splice(favoritesIndex, 1);
-            }
-        },
-        setCartStatus: (
-            state,
-            action: PayloadAction<{
-                count: number;
-                card: SinglePageTypes | null;
-            }>
-        ) => {
-            const {card, count} = action.payload;
-
-            const cartIndex = state.cartPosts.findIndex(
-                (book) => book.isbn13 === card?.isbn13
-            );
-
-            if (cartIndex === -1 && card) {
-                state.cartPosts.push(card);
-            } else {
-                state.cartPosts.splice(cartIndex, 1);
-            }
-
-            if (count === 0 && count < 0) {
-                state.cartPosts.splice(cartIndex, 1)
-            }
-        },
-        getSearchedPosts: (_, __: PayloadAction<string>) => {
-        },
-        setSearchedValue: (state, action: PayloadAction<string>) => {
-            state.searchValue = action.payload;
-        },
-        setSearchedPosts: (state, action: PayloadAction<CardTypes[]>) => {
-            state.searchedPosts = action.payload;
-        },
+  name: "selected post",
+  initialState,
+  reducers: {
+    getAllPosts: (_, __: PayloadAction<undefined>) => {},
+    setAllPosts: (state, action: PayloadAction<CardTypes[]>) => {
+      state.postsList = action.payload;
     },
+    getSinglePost: (_, __: PayloadAction<string>) => {},
+    setSinglePost: (state, action: PayloadAction<SinglePageTypes | null>) => {
+      state.singlePost = action.payload;
+    },
+    setFavoriteStatus: (
+      state,
+      action: PayloadAction<{ status: boolean; card: SinglePageTypes | null }>
+    ) => {
+      const { card } = action.payload;
+
+      const favoritesIndex = state.favoritePosts.findIndex(
+        (book) => book.isbn13 === card?.isbn13
+      );
+
+      if (favoritesIndex === -1 && card) {
+        state.favoritePosts.push(card);
+      } else {
+        state.favoritePosts.splice(favoritesIndex, 1);
+      }
+    },
+    setCartStatus: (
+      state,
+      action: PayloadAction<{
+        count: number;
+        card: SinglePageTypes | null;
+      }>
+    ) => {
+      const { card, count } = action.payload;
+
+      const cartIndex = state.cartPosts.findIndex(
+        (book) => book.isbn13 === card?.isbn13
+      );
+
+      if (cartIndex === -1 && card) {
+        state.cartPosts.push(card);
+      } else {
+        state.cartPosts.splice(cartIndex, 1);
+      }
+
+      if (count === 0 && count < 0) {
+        state.cartPosts.splice(cartIndex, 1);
+      }
+    },
+    getSearchedPosts: (_, __: PayloadAction<GetSeachedPostsPayload>) => {},
+    setSearchedValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    setSearchedPosts: (
+      state,
+      {
+        payload: { cardList, postCounter },
+      }: PayloadAction<SetSearchedPostsPayload>
+    ) => {
+      state.searchedPosts = cardList;
+      state.postCounter = postCounter;
+    },
+  },
 });
 
 export const {
@@ -107,4 +122,5 @@ export const PostSelectors = {
     getCart: (state: RootState) => state.posts.cartPosts,
     getSearchedValue: (state: RootState) => state.posts.searchValue,
     getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
+    getSearchedPostsCount: (state: RootState) => state.posts.postCounter,
 };

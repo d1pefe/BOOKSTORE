@@ -1,7 +1,7 @@
 import {all, call, put, takeLatest} from "redux-saga/effects";
 
 import {
-    getAllPosts,
+    getAllPosts, GetSeachedPostsPayload,
     getSearchedPosts,
     getSinglePost,
     setAllPosts,
@@ -31,10 +31,11 @@ function* getSinglePostsWorker(action: PayloadAction<string>) {
     }
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<string>) {
-    const {ok, data, problem}: ApiResponse<any> = yield call(API.getSearchList, action.payload);
+function* getSearchedPostsWorker(action: PayloadAction<GetSeachedPostsPayload>) {
+    const { page, query } = action.payload;
+    const {ok, data, problem}: ApiResponse<any> = yield call(API.getSearchList, page, query);
     if (ok && data) {
-        yield put(setSearchedPosts(data.books));
+        yield put(setSearchedPosts({cardList: data.books, postCounter: data.total}));
     } else {
         console.warn("Error getting search posts ", problem)
     }

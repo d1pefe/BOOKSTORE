@@ -12,8 +12,8 @@ const getPost = (id: string) => {
     return API.get(`books/${id}`)
 }
 
-const getSearchList = (query? : string) => {
-  return API.get(`/search/${query}`);
+const getSearchList = (page: number, query? : string) => {
+  return API.get(`/search/${query}/${page}`);
 }
 
 export default {
