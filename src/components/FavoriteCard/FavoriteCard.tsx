@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { Rate } from "antd";
 import Button, { ButtonTypes } from "../Button";
 import { LikeIcon } from "../../assets/icons";
-import {PostSelectors} from "../../redux/reducers/postSlice";
-import {useSelector} from "react-redux";
+import {PostSelectors, setFavoriteStatus} from "../../redux/reducers/postSlice";
+import {useDispatch, useSelector} from "react-redux";
 import classNames from "classnames";
 
 type FavoriteCardTypes = {
     data: SinglePageTypes;
-    onClick: any;
 };
 
-const FavoriteCard: FC<FavoriteCardTypes> = ({ data , onClick}) => {
+const FavoriteCard: FC<FavoriteCardTypes> = ({ data}) => {
+    const dispatch = useDispatch();
   const navigate = useNavigate();
   const onCardClick = () => {
     navigate(`/books/${data.isbn13}`);
@@ -25,6 +25,12 @@ const FavoriteCard: FC<FavoriteCardTypes> = ({ data , onClick}) => {
     const favoritesIndex = favorites.findIndex(
         (book) => book.isbn13 === data?.isbn13
     );
+
+    const onLikeClick =
+        (status: boolean, card = data) =>
+            () => {
+                dispatch(setFavoriteStatus({ status, card }));
+            };
 
   return (
     <>
@@ -50,7 +56,7 @@ const FavoriteCard: FC<FavoriteCardTypes> = ({ data , onClick}) => {
         </div>
         <Button
           title={<LikeIcon />}
-          onClick={onClick}
+          onClick={onLikeClick(true)}
           types={ButtonTypes.Like}
           className={classNames(styles.buttonLike, {
               [styles.activeButtonLike]: favoritesIndex > -1,

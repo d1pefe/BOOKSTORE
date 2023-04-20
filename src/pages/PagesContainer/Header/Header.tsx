@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {KeyboardEvent, useState} from "react";
 
 import styles from "./Header.module.scss";
 import {
@@ -13,7 +13,7 @@ import Input from "../../../components/Input";
 import Button, {ButtonTypes} from "../../../components/Button";
 import {useNavigate} from "react-router-dom";
 import {RoutesList} from "../../Router";
-import {getSearchedPosts, setSearchedValue} from "../../../redux/reducers/postSlice";
+import {setSearchedValue} from "../../../redux/reducers/postSlice";
 import {useDispatch} from "react-redux";
 
 const Header = () => {
@@ -44,6 +44,12 @@ const Header = () => {
         navigate(RoutesList.Search)
     }
 
+    const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === "Enter") {
+            onSearchButtonClick();
+        }
+    }
+
     return (
         <>
             {isOpened && (
@@ -63,7 +69,7 @@ const Header = () => {
                             onChange={setSearchText}
                             className={styles.searchBurgerInput}
                         />
-                        <div onClick={onSearchButtonClick}>
+                        <div onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
                             <SearchIcon />
                         </div>
                         <Button
@@ -101,8 +107,9 @@ const Header = () => {
                         placeholder={"Search"}
                         onChange={setSearchText}
                         className={styles.searchInput}
+                        onKeyDown={onKeyDown}
                     />
-                    <div onClick={onSearchButtonClick}>
+                    <div onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
                         <SearchIcon />
                     </div>
                     <div className={styles.iconsContainer}>

@@ -17,7 +17,7 @@ const Search = () => {
         if (query !== null) {
             dispatch(getSearchedPosts(query));
         }
-    }, []);
+    }, [query]);
 
     const searchedPosts = useSelector(PostSelectors.getSearchedPosts);
 
