@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import styles from "./Authorize.module.scss";
 import Tabs from "../../components/Tabs";
@@ -38,7 +38,10 @@ const Authorize = () => {
   const onConfPassChange = (e: string) => setConfPass(e);
   const [name, setName] = useState("");
   const onNameChange = (e: string) => setName(e);
-  const [nameError, setNameError] = useState("")
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passError, setPassError] = useState("");
+  const [confPassError, setConfPassError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -52,6 +55,8 @@ const Authorize = () => {
           token: user.refreshToken,
         })
       );
+      setEmail("");
+      setPass("");
     });
   };
 
@@ -66,23 +71,66 @@ const Authorize = () => {
         })
       );
       setActiveTab(TabsNames.SING_IN);
+      setEmail("");
+      setPass("");
+      setName("");
+      setConfPass("");
     });
-    onNameChange("");
-    onPassChange("");
-    onEmailChange("");
   };
 
-  useEffect(()=>{
-      if(name.length === 0 && name.length <= 3 ) {
-          setNameError("Name is required field")
-      } else {
-          setNameError("")
-      }
-  }, [name])
+  useEffect(() => {
+    if (name.length > 0 && name.length <= 3) {
+      setNameError("Name is required field");
+    } else {
+      setNameError("");
+    }
+  }, [name]);
+
+  useEffect(() => {
+    if (email.length > 0 && email.length <= 3) {
+      setEmailError("Email is required field");
+    } else {
+      setEmailError("");
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (pass.length > 0 && pass.length <= 6) {
+      setPassError("The password must consist of at least 6 characters");
+    } else {
+      setPassError("");
+    }
+  }, [pass]);
+
+  useEffect(() => {
+    if (confPass !== pass && confPass.length <= 6) {
+      setConfPassError("The password must consist of at least 6 characters");
+    } else {
+      setConfPassError("");
+    }
+  }, [confPass, pass]);
 
   const isValidSingUp = useMemo(() => {
-    return nameError.length === 0
-  }, [nameError, name]);
+    return (
+      nameError.length === 0 &&
+      emailError.length === 0 &&
+      passError.length === 0 &&
+      confPassError.length === 0 &&
+      pass.length >= 6 &&
+      pass === confPass &&
+      name.length >= 3 &&
+      email.length >= 3
+    );
+  }, [nameError, emailError, passError, confPassError, name, email, pass, confPass]);
+
+  const  isValidSingIn = useMemo(() => {
+      return (
+          emailError.length === 0 &&
+          passError.length === 0 &&
+          pass.length >= 6 &&
+          email.length >= 3
+      );
+  }, [emailError, passError, email, pass]);
 
   const getAuthorizeForm = () => {
     switch (activeTab) {
@@ -92,6 +140,7 @@ const Authorize = () => {
             <Input
               placeholder={"Your email"}
               inputType={"email"}
+              value={email}
               onChange={onEmailChange}
               title={"Email"}
               className={styles.input}
@@ -99,6 +148,7 @@ const Authorize = () => {
             <Input
               placeholder={"Your password"}
               inputType={"password"}
+              value={pass}
               onChange={onPassChange}
               title={"Password"}
               className={styles.input}
@@ -112,6 +162,7 @@ const Authorize = () => {
             <Input
               placeholder={"Your name"}
               inputType={"text"}
+              value={name}
               onChange={onNameChange}
               title={"Name"}
               className={styles.input}
@@ -120,23 +171,29 @@ const Authorize = () => {
             <Input
               placeholder={"Your email"}
               inputType={"email"}
+              value={email}
               onChange={onEmailChange}
               title={"Email"}
               className={styles.input}
+              errText={emailError}
             />
             <Input
               placeholder={"Your password"}
               inputType={"password"}
+              value={pass}
               onChange={onPassChange}
               title={"Password"}
               className={styles.input}
+              errText={passError}
             />
             <Input
               placeholder={"Confirm your password"}
               inputType={"password"}
+              value={confPass}
               onChange={onConfPassChange}
               title={"Confirm password"}
               className={styles.input}
+              errText={confPassError}
             />
           </div>
         );
@@ -160,7 +217,11 @@ const Authorize = () => {
               ? () => handleLogin(email, pass)
               : () => handleSingUp(email, pass)
           }
-          // disabled={!isValidSingUp}
+          disabled={
+            activeTab === TabsNames.SING_IN
+              ? !isValidSingIn
+              : !isValidSingUp
+        }
           types={ButtonTypes.Main}
           className={styles.button}
         />
