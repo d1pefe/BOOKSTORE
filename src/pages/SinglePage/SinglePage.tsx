@@ -20,12 +20,15 @@ import {
   getSinglePost,
   PostSelectors,
   setFavoriteStatus,
+  setPostVisibility,
+  setSelectedPost,
   setSinglePost,
 } from "../../redux/reducers/postSlice";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
 import { useAuth } from "../../hooks/useAuth";
 import { addToCart } from "../../redux/reducers/cartSlice";
+import SelectedPostModal from "./SelectedPostModal";
 
 export type SinglePageTypes = {
   title: string;
@@ -92,6 +95,10 @@ const MOCK_ARRAY = [
 const SinglePage = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const { isLoggedIn } = useAuth();
+
+  const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
+  const onTabClick = (key: TabsNames) => setActiveTab(key);
 
   const data = useSelector(PostSelectors.getSinglePost);
   useEffect(() => {
@@ -118,10 +125,15 @@ const SinglePage = () => {
     }
   };
 
-  const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
-  const onTabClick = (key: TabsNames) => setActiveTab(key);
+  const pdfValuesArray = !!data?.pdf ? Object.values(data?.pdf) : [];
+  const pdfValue = pdfValuesArray.length > 0 ? pdfValuesArray[0] : null;
 
-  const { isLoggedIn } = useAuth();
+  const isVisible = useSelector(PostSelectors.getVisibleSelectedPost);
+
+  const onPdfClick = () => {
+    dispatch(setSelectedPost(pdfValue));
+    dispatch(setPostVisibility(!isVisible));
+  };
 
   return data !== null ? (
     <div className={styles.container}>
@@ -175,7 +187,11 @@ const SinglePage = () => {
             types={ButtonTypes.Main}
             disabled={!isLoggedIn}
           />
-          <div className={styles.preview}>Preview book</div>
+          {pdfValue && (
+            <div className={styles.preview} onClick={onPdfClick}>
+              Preview book
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.secondaryInfo}>
@@ -192,6 +208,7 @@ const SinglePage = () => {
         <Title title={"SIMILAR BOOKS"} className={styles.similarTitle} />
         <CardList cardList={MOCK_ARRAY} />
       </div>
+        <SelectedPostModal />
     </div>
   ) : null;
 };

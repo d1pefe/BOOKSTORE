@@ -11,6 +11,8 @@ type InitialType = {
     searchValue: string | null;
     searchedPosts: CardTypes[];
     postCounter: number;
+    selectedPost: string | null;
+    isVisibleSelectedModal: boolean;
 };
 
 export type GetSeachedPostsPayload = {
@@ -20,7 +22,7 @@ export type GetSeachedPostsPayload = {
 
 export type SetSearchedPostsPayload = {
     cardList: CardTypes[],
-    postCounter: number
+    postCounter: number,
 }
 
 const initialState: InitialType = {
@@ -30,6 +32,8 @@ const initialState: InitialType = {
     searchValue: null,
     searchedPosts: [],
     postCounter: 1,
+    selectedPost: null,
+    isVisibleSelectedModal: false,
 };
 
 const postSlice = createSlice({
@@ -73,6 +77,12 @@ const postSlice = createSlice({
       state.searchedPosts = cardList;
       state.postCounter = postCounter;
     },
+      setSelectedPost: (state, action: PayloadAction<string | null>) => {
+          state.selectedPost = action.payload;
+      },
+      setPostVisibility: (state, action: PayloadAction<boolean>) => {
+          state.isVisibleSelectedModal = action.payload;
+      },
   },
 });
 
@@ -84,7 +94,9 @@ export const {
     setFavoriteStatus,
     getSearchedPosts,
     setSearchedPosts,
-    setSearchedValue
+    setSearchedValue,
+    setSelectedPost,
+    setPostVisibility,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -96,4 +108,7 @@ export const PostSelectors = {
     getSearchedValue: (state: RootState) => state.posts.searchValue,
     getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
     getSearchedPostsCount: (state: RootState) => state.posts.postCounter,
+    getSelectedPost: (state: RootState) => state.posts.selectedPost,
+    getVisibleSelectedPost: (state: RootState) =>
+        state.posts.isVisibleSelectedModal,
 };
