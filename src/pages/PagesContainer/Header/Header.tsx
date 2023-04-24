@@ -15,6 +15,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutesList} from "../../Router";
 import {setSearchedValue} from "../../../redux/reducers/postSlice";
 import {useDispatch} from "react-redux";
+import {useAuth} from "../../../hooks/useAuth";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Header = () => {
     const onClickBurger = () => {
         setOpened(!isOpened);
     };
-    const isLoggedIn = false;
+    const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
     const onAuthButtonClick = () => {
         navigate(RoutesList.Authorize);

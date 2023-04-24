@@ -12,6 +12,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { setUser } from "../../redux/reducers/userSlice";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../Router";
 
 const TABS_LIST = [
   {
@@ -27,6 +29,8 @@ const TABS_LIST = [
 ];
 
 const Authorize = () => {
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState(TabsNames.SING_IN);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
 
@@ -57,6 +61,7 @@ const Authorize = () => {
       );
       setEmail("");
       setPass("");
+      navigate(RoutesList.Main);
     });
   };
 
@@ -121,15 +126,24 @@ const Authorize = () => {
       name.length >= 3 &&
       email.length >= 3
     );
-  }, [nameError, emailError, passError, confPassError, name, email, pass, confPass]);
+  }, [
+    nameError,
+    emailError,
+    passError,
+    confPassError,
+    name,
+    email,
+    pass,
+    confPass,
+  ]);
 
-  const  isValidSingIn = useMemo(() => {
-      return (
-          emailError.length === 0 &&
-          passError.length === 0 &&
-          pass.length >= 6 &&
-          email.length >= 3
-      );
+  const isValidSingIn = useMemo(() => {
+    return (
+      emailError.length === 0 &&
+      passError.length === 0 &&
+      pass.length >= 6 &&
+      email.length >= 3
+    );
   }, [emailError, passError, email, pass]);
 
   const getAuthorizeForm = () => {
@@ -218,10 +232,8 @@ const Authorize = () => {
               : () => handleSingUp(email, pass)
           }
           disabled={
-            activeTab === TabsNames.SING_IN
-              ? !isValidSingIn
-              : !isValidSingUp
-        }
+            activeTab === TabsNames.SING_IN ? !isValidSingIn : !isValidSingUp
+          }
           types={ButtonTypes.Main}
           className={styles.button}
         />

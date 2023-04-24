@@ -17,15 +17,15 @@ import Subscribe from "../../components/Subscribe";
 import CardList from "../../components/CardList";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    getSinglePost,
-    PostSelectors,
-    setFavoriteStatus,
-    setSinglePost,
+  getSinglePost,
+  PostSelectors,
+  setFavoriteStatus,
+  setSinglePost,
 } from "../../redux/reducers/postSlice";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
-import {useAuth} from "../../hooks/useAuth";
-import {addToCart} from "../../redux/reducers/cartSlice";
+import { useAuth } from "../../hooks/useAuth";
+import { addToCart } from "../../redux/reducers/cartSlice";
 
 export type SinglePageTypes = {
   title: string;
@@ -112,18 +112,16 @@ const SinglePage = () => {
       dispatch(setFavoriteStatus({ status, card }));
     };
 
-    const onAddToCartButtonClick =
-        () =>
-            () => {
-                if (data) {
-                    dispatch(addToCart({ data }));
-                }
-             };
+  const onAddToCartButtonClick = () => () => {
+    if (data) {
+      dispatch(addToCart({ data }));
+    }
+  };
 
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
 
-    const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   return data !== null ? (
     <div className={styles.container}>
