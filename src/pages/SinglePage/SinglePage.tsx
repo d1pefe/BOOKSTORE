@@ -27,7 +27,7 @@ import {
   setSinglePost,
 } from "../../redux/reducers/postSlice";
 
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { addToCart } from "../../redux/reducers/cartSlice";
 
@@ -79,6 +79,7 @@ const MOCK_ARRAY = [
 const SinglePage = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
 
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
@@ -121,13 +122,17 @@ const SinglePage = () => {
         setIsModalOpen(false);
     };
 
+    const goBack = () => {
+        navigate(-1);
+    }
+
 
   return data !== null ? (
     <div className={styles.container}>
       <div className={styles.titleBlock}>
         <Button
           title={<ArrowLeftIcon />}
-          onClick={() => {}}
+          onClick={goBack}
           types={ButtonTypes.Arrow}
         />
         <Title title={data.title} className={styles.title} />

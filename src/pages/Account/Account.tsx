@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./SinglePage.module.scss";
+import styles from "./Account.module.scss";
 
 
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import Title from "../../components/Title";
 
 
-const SinglePage = () => {
+const Account = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { isLoggedIn, email, name } = useAuth();
@@ -23,4 +23,4 @@ const SinglePage = () => {
   );
 };
 
-export default SinglePage;
+export default Account;

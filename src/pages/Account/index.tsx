@@ -1,1 +1,1 @@
-export { default } from "./SinglePage"
+export { default } from "./Account"
