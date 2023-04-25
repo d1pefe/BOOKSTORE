@@ -43,6 +43,9 @@ const cartSlice = createSlice({
             const cartIndex = state.cart.findIndex((item: FavoriteCardTypes) => item.data.isbn13 === action.payload.data.isbn13);
             state.cart.splice(cartIndex, 1);
         },
+        removeAllCart: (state) => {
+            state.cart = initialState.cart
+        }
     },
 });
 
@@ -52,6 +55,7 @@ export const {
     incrementQuantity,
     decrementQuantity,
     removeItem,
+    removeAllCart,
 } = cartSlice.actions;
 
 export const CartSelectors = {

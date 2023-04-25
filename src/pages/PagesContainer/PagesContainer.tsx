@@ -10,6 +10,8 @@ import {removeUser} from "../../redux/reducers/userSlice";
 
 import {RoutesList} from "../Router";
 import {Outlet, useNavigate} from "react-router-dom";
+import {removePosts} from "../../redux/reducers/postSlice";
+import {removeAllCart} from "../../redux/reducers/cartSlice";
 
 const PagesContainer = () => {
     const dispatch = useDispatch();
@@ -17,6 +19,8 @@ const PagesContainer = () => {
     const {isLoggedIn} = useAuth();
     const onLogOutClick = () => {
         dispatch(removeUser());
+        dispatch(removePosts());
+        dispatch(removeAllCart())
         navigate(RoutesList.Authorize);
     };
 

@@ -10,8 +10,6 @@ type InitialType = {
     searchValue: string | null;
     searchedPosts: CardTypes[];
     postCounter: number;
-    selectedPost: string | null;
-    isVisibleSelectedModal: boolean;
 };
 
 const initialState: InitialType = {
@@ -21,8 +19,6 @@ const initialState: InitialType = {
     searchValue: null,
     searchedPosts: [],
     postCounter: 1,
-    selectedPost: null,
-    isVisibleSelectedModal: false,
 };
 
 const postSlice = createSlice({
@@ -66,6 +62,14 @@ const postSlice = createSlice({
       state.searchedPosts = cardList;
       state.postCounter = postCounter;
     },
+      removePosts: (state) => {
+        state.favoritePosts = initialState.favoritePosts;
+          state.postsList = initialState.postsList
+          state.singlePost = initialState.singlePost
+          state.searchValue = initialState. searchValue
+          state.searchedPosts = initialState.searchedPosts
+          state.postCounter = initialState.postCounter
+      }
   },
 });
 
@@ -78,6 +82,7 @@ export const {
     getSearchedPosts,
     setSearchedPosts,
     setSearchedValue,
+    removePosts,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -89,7 +94,4 @@ export const PostSelectors = {
     getSearchedValue: (state: RootState) => state.posts.searchValue,
     getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
     getSearchedPostsCount: (state: RootState) => state.posts.postCounter,
-    getSelectedPost: (state: RootState) => state.posts.selectedPost,
-    getVisibleSelectedPost: (state: RootState) =>
-        state.posts.isVisibleSelectedModal,
 };
