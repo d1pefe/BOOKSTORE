@@ -29,7 +29,7 @@ const Header = () => {
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
     const onAuthButtonClick = () => {
-        navigate(RoutesList.Authorize);
+        navigate(RoutesList.Account);
     };
     const onHeadButtonClick = () => {
         navigate(RoutesList.Main);
@@ -97,9 +97,9 @@ const Header = () => {
                         onClick={isLoggedIn ? undefined : onAuthButtonClick}
                         className={styles.logButton}
                     />
+                    <div className={styles.overlay}></div>
                 </div>
             )}
-            {isOpened && <div className={styles.overlay}></div>}
             <div className={styles.header}>
                 <div className={styles.headerFlex}>
                     <div onClick={onHeadButtonClick}>
@@ -125,7 +125,7 @@ const Header = () => {
                         </div>
                         <div
                             className={styles.userIcon}
-                            onClick={isLoggedIn ? undefined : onAuthButtonClick}
+                            onClick={onAuthButtonClick}
                         >
                             <UserIcon/>
                         </div>

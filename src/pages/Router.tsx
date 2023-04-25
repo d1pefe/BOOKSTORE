@@ -12,13 +12,13 @@ import Favorites from "./Favorites";
 import Cart from "./Cart";
 import Search from "./Search";
 import EmptyState from "../components/EmptyState";
+import Account from "./Account";
 
 export enum RoutesList {
     Main = "/",
     Search = "/main/search",
     Book = "/books/:id",
     Authorize = "/authorize",
-    Reset = "/reset",
     Account = "/account",
     Cart = "/cart",
     Favorites = "/favorites",
@@ -33,8 +33,8 @@ const Router = () => {
                 <Route path={RoutesList.Main} element={<Main/>}/>
                 <Route path={RoutesList.Authorize} element={<Authorize/>}/>
                 <Route path={RoutesList.Book} element={<SinglePage/>}/>
-                {/*<Route path={RoutesList.Account} element={isLoggedIn ? <Account /> : <Navigate to={RoutesList.SelectedPostModal} />}/>*/}
                 <Route path={RoutesList.Search} element={<Search/>}/>
+                <Route path={RoutesList.Account} element={isLoggedIn ? <Account /> : <Navigate to={RoutesList.Authorize} />}/>
                 <Route path={RoutesList.Cart} element={isLoggedIn ? <Cart /> : <Navigate to={RoutesList.Authorize} />}/>
                 <Route path={RoutesList.Favorites} element={isLoggedIn ? <Favorites/> : <Navigate to={RoutesList.Authorize}/>}/>
                 <Route path={RoutesList.Default} element={<EmptyState/>}/>

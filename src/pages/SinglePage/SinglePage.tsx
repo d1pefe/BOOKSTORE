@@ -12,20 +12,18 @@ import {
   TwitterIcon,
 } from "../../assets/icons";
 import Title from "../../components/Title";
-import { Rate } from "antd";
+import {Rate} from "antd";
 import Tabs from "../../components/Tabs";
 import { TabsNames } from "../../components/Tabs/Tabs";
 import Subscribe from "../../components/Subscribe";
 import CardList from "../../components/CardList";
-import SelectedPostModal from "./SelectedPostModal";
+import Modal from "../../components/Modal";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePost,
   PostSelectors,
   setFavoriteStatus,
-  setPostVisibility,
-  setSelectedPost,
   setSinglePost,
 } from "../../redux/reducers/postSlice";
 
@@ -114,12 +112,15 @@ const SinglePage = () => {
   const pdfValuesArray = !!data?.pdf ? Object.values(data?.pdf) : [];
   const pdfValue = pdfValuesArray.length > 0 ? pdfValuesArray[0] : null;
 
-  const isVisible = useSelector(PostSelectors.getVisibleSelectedPost);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
 
-  const onPdfClick = () => {
-    dispatch(setSelectedPost(pdfValue));
-    dispatch(setPostVisibility(!isVisible));
-  };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
 
   return data !== null ? (
     <div className={styles.container}>
@@ -174,7 +175,7 @@ const SinglePage = () => {
             disabled={!isLoggedIn}
           />
           {pdfValue && (
-            <div className={styles.preview} onClick={onPdfClick}>
+            <div className={styles.preview} onClick={showModal}>
               Preview book
             </div>
           )}
@@ -194,7 +195,10 @@ const SinglePage = () => {
         <Title title={"SIMILAR BOOKS"} className={styles.similarTitle} />
         <CardList cardList={MOCK_ARRAY} />
       </div>
-        <SelectedPostModal />
+        <Modal isVisible={isModalOpen} onClose={handleCancel}>
+                <iframe src={pdfValue}>
+                </iframe>
+        </Modal>
     </div>
   ) : null;
 };

@@ -66,12 +66,6 @@ const postSlice = createSlice({
       state.searchedPosts = cardList;
       state.postCounter = postCounter;
     },
-      setSelectedPost: (state, action: PayloadAction<string | null>) => {
-          state.selectedPost = action.payload;
-      },
-      setPostVisibility: (state, action: PayloadAction<boolean>) => {
-          state.isVisibleSelectedModal = action.payload;
-      },
   },
 });
 
@@ -84,8 +78,6 @@ export const {
     getSearchedPosts,
     setSearchedPosts,
     setSearchedValue,
-    setSelectedPost,
-    setPostVisibility,
 } = postSlice.actions;
 
 export default postSlice.reducer;
