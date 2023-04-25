@@ -1,9 +1,11 @@
 import React, { useEffect} from "react";
 
 import styles from "./Main.module.scss";
+
 import Title from "../../components/Title";
 import CardList from "../../components/CardList";
 import Subscribe from "../../components/Subscribe";
+
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts, PostSelectors} from "../../redux/reducers/postSlice";
 

@@ -1,25 +1,23 @@
 import React, { FC } from "react";
-import { SinglePageTypes } from "../../pages/SinglePage/SinglePage";
-
-import styles from "./BooksInCartList.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { FavoriteCardTypes } from "../../utils/@globalTypes";
+import styles from "./BooksInCartList.module.scss";
+
 import Button, { ButtonTypes } from "../Button";
 import { ClosingIcon, MinusIcon, PlusIcon } from "../../assets/icons";
-import { useDispatch } from "react-redux";
+
 import {
   decrementQuantity,
   incrementQuantity,
   removeItem,
 } from "../../redux/reducers/cartSlice";
 
-export type FavoriteCardTypes = {
-  data: SinglePageTypes;
-  count?: number;
-};
-
 const BooksInCartList: FC<FavoriteCardTypes> = ({ count, data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onCardClick = () => {
     navigate(`/books/${data.isbn13}`);
   };

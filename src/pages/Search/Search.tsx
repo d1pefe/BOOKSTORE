@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
+import classNames from "classnames";
 
 import styles from "./Search.module.scss";
+
 import Title from "../../components/Title";
 import CardList from "../../components/CardList";
+import ReactPaginate from "react-paginate";
+
 import EmptyState from "../../components/EmptyState"
 import {useDispatch, useSelector} from "react-redux";
 import {
     getSearchedPosts,
     PostSelectors,
 } from "../../redux/reducers/postSlice";
-import ReactPaginate from "react-paginate";
-import classNames from "classnames";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -22,18 +24,18 @@ const Search = () => {
     const postsCount = useSelector(PostSelectors.getSearchedPostsCount);
     const pagesCount = Math.ceil(postsCount / 10);
 
+    const searchedPosts = useSelector(PostSelectors.getSearchedPosts);
+
+    const onPageChange = ({ selected }: { selected: number }) => {
+        setCurrentPage(selected + 1);
+    };
+
     useEffect(() => {
         const page = currentPage;
         if (query !== null) {
             dispatch(getSearchedPosts({page, query}));
         }
     }, [currentPage, query]);
-
-    const searchedPosts = useSelector(PostSelectors.getSearchedPosts);
-
-    const onPageChange = ({ selected }: { selected: number }) => {
-        setCurrentPage(selected + 1);
-    };
 
     return (
         <div className={styles.container}>

@@ -1,7 +1,7 @@
 import {all, call, put, takeLatest} from "redux-saga/effects";
 
 import {
-    getAllPosts, GetSeachedPostsPayload,
+    getAllPosts,
     getSearchedPosts,
     getSinglePost,
     setAllPosts,
@@ -10,8 +10,8 @@ import {
 } from "../reducers/postSlice";
 import API from "../api";
 import {ApiResponse} from "apisauce";
-import {SinglePageTypes} from "../../pages/SinglePage/SinglePage";
 import {PayloadAction} from "@reduxjs/toolkit";
+import {GetSearchedPostsPayload, SinglePageTypes} from "../../utils/@globalTypes";
 
 function* getAllPostsWorker() {
     const {ok, data, problem}: ApiResponse<any> = yield call(API.getPosts);
@@ -31,7 +31,7 @@ function* getSinglePostsWorker(action: PayloadAction<string>) {
     }
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<GetSeachedPostsPayload>) {
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
     const { page, query } = action.payload;
     const {ok, data, problem}: ApiResponse<any> = yield call(API.getSearchList, page, query);
     if (ok && data) {

@@ -1,7 +1,8 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import classNames from "classnames";
 
 import styles from "./Button.module.scss";
+import { ButtonProps } from "../../utils/@globalTypes";
 
 export enum ButtonTypes {
   Main = "Main",
@@ -9,14 +10,6 @@ export enum ButtonTypes {
   Arrow = "Arrow",
   Like = "Like",
 }
-
-type ButtonProps = {
-  title: string | ReactNode;
-  onClick: any;
-  types: ButtonTypes;
-  disabled?: boolean;
-  className?: string;
-};
 
 const btnStyles = {
   [ButtonTypes.Main]: styles.primaryButton,

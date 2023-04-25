@@ -1,12 +1,15 @@
 import React from "react";
 
-import {Outlet, useNavigate} from "react-router-dom";
 import styles from "./PagesContainer.module.scss";
+
 import Header from "./Header";
+
 import {useAuth} from "../../hooks/useAuth";
 import {useDispatch} from "react-redux";
 import {removeUser} from "../../redux/reducers/userSlice";
+
 import {RoutesList} from "../Router";
+import {Outlet, useNavigate} from "react-router-dom";
 
 const PagesContainer = () => {
     const dispatch = useDispatch();

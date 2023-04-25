@@ -1,9 +1,10 @@
 import React from "react";
 
 import styles from "./Favorites.module.scss";
+import FavoriteCard from "../../components/FavoriteCard";
+
 import { useSelector } from "react-redux";
 import {PostSelectors} from "../../redux/reducers/postSlice";
-import FavoriteCard from "../../components/FavoriteCard";
 
 const Favorites = () => {
   const favorites = useSelector(PostSelectors.getFavorites);

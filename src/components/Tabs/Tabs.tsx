@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import classNames from "classnames";
 
 import styles from "./Tabs.module.scss";
+import {TabsProps} from "../../utils/@globalTypes";
 
 export enum TabsNames {
     DESCRIPTION,
@@ -10,19 +11,6 @@ export enum TabsNames {
     SING_IN,
     SING_UP,
 }
-
-type TabType = {
-  key: TabsNames;
-  title: string;
-  disabled: boolean;
-};
-
-type TabsProps = {
-  data: TabType[];
-  className?: string;
-  onClick: (key: TabsNames) => void;
-  activeTab: TabsNames;
-};
 
 const Tabs: FC<TabsProps> = ({ data, onClick, activeTab, className }) => {
   const onTabClick = (key: TabsNames) => () => onClick(key);

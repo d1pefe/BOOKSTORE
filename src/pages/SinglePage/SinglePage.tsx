@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import classNames from "classnames";
 
 import styles from "./SinglePage.module.scss";
+
 import Button, { ButtonTypes } from "../../components/Button";
 import {
   ArrowLeftIcon,
@@ -15,6 +17,8 @@ import Tabs from "../../components/Tabs";
 import { TabsNames } from "../../components/Tabs/Tabs";
 import Subscribe from "../../components/Subscribe";
 import CardList from "../../components/CardList";
+import SelectedPostModal from "./SelectedPostModal";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePost,
@@ -24,28 +28,10 @@ import {
   setSelectedPost,
   setSinglePost,
 } from "../../redux/reducers/postSlice";
+
 import { useParams } from "react-router-dom";
-import classNames from "classnames";
 import { useAuth } from "../../hooks/useAuth";
 import { addToCart } from "../../redux/reducers/cartSlice";
-import SelectedPostModal from "./SelectedPostModal";
-
-export type SinglePageTypes = {
-  title: string;
-  subtitle: string;
-  authors: string;
-  publisher: string;
-  isbn10: string;
-  isbn13: string;
-  pages: string;
-  year: string;
-  rating: number;
-  desc: string;
-  price: string;
-  image: string;
-  url: string;
-  pdf: object;
-};
 
 const TABS_LIST = [
   {

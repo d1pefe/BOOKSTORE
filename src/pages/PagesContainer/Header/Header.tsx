@@ -1,6 +1,7 @@
 import React, {KeyboardEvent, useState} from "react";
 
 import styles from "./Header.module.scss";
+
 import {
     BasketIcon,
     BurgerIcon,
@@ -11,11 +12,13 @@ import {
 } from "../../../assets/icons";
 import Input from "../../../components/Input";
 import Button, {ButtonTypes} from "../../../components/Button";
-import {useNavigate} from "react-router-dom";
-import {RoutesList} from "../../Router";
 import {setSearchedValue} from "../../../redux/reducers/postSlice";
+
 import {useDispatch} from "react-redux";
 import {useAuth} from "../../../hooks/useAuth";
+
+import {useNavigate} from "react-router-dom";
+import {RoutesList} from "../../Router";
 
 const Header = () => {
     const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {FavoriteCardTypes} from "../../components/BooksInCartList/BooksInCartList";
 import {RootState} from "../store";
+import {FavoriteCardTypes} from "../../utils/@globalTypes";
 
 type InitialType = {
     cart: FavoriteCardTypes[],

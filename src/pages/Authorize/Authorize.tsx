@@ -1,18 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react";
-
-import styles from "./Authorize.module.scss";
-import Tabs from "../../components/Tabs";
-import { TabsNames } from "../../components/Tabs/Tabs";
-import Input from "../../components/Input";
-import Button, { ButtonTypes } from "../../components/Button";
-import { useDispatch } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+import styles from "./Authorize.module.scss";
+
+import Tabs from "../../components/Tabs";
+import { TabsNames } from "../../components/Tabs/Tabs";
+import Input from "../../components/Input";
+import Button, { ButtonTypes } from "../../components/Button";
+
 import { setUser } from "../../redux/reducers/userSlice";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { RoutesList } from "../Router";
 
 const TABS_LIST = [
@@ -30,24 +33,26 @@ const TABS_LIST = [
 
 const Authorize = () => {
   const navigate = useNavigate();
+    const dispatch = useDispatch();
 
   const [activeTab, setActiveTab] = useState(TabsNames.SING_IN);
+
   const onTabClick = (key: TabsNames) => setActiveTab(key);
 
   const [email, setEmail] = useState("");
-  const onEmailChange = (e: string) => setEmail(e);
   const [pass, setPass] = useState("");
-  const onPassChange = (e: string) => setPass(e);
   const [confPass, setConfPass] = useState("");
-  const onConfPassChange = (e: string) => setConfPass(e);
   const [name, setName] = useState("");
+
   const onNameChange = (e: string) => setName(e);
+  const onConfPassChange = (e: string) => setConfPass(e);
+  const onPassChange = (e: string) => setPass(e);
+  const onEmailChange = (e: string) => setEmail(e);
+
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passError, setPassError] = useState("");
   const [confPassError, setConfPassError] = useState("");
-
-  const dispatch = useDispatch();
 
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();

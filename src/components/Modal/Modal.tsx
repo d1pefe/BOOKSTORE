@@ -1,14 +1,10 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 
 import styles from "./Modal.module.scss";
+import {ModalProps} from "../../utils/@globalTypes";
+
 import { ClosingIcon } from "../../assets/icons";
 import Button, { ButtonTypes } from "../Button";
-
-type ModalProps = {
-  isVisible: boolean;
-  onClose: () => void;
-  children: ReactNode;
-};
 
 const Modal: FC<ModalProps> = ({ isVisible, onClose, children }) => {
   return isVisible ? (

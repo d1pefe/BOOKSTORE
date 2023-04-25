@@ -1,11 +1,8 @@
-import React, {FC} from "react";
-import Card, { CardTypes }  from "../Card";
+import React, { FC } from "react";
+import Card  from "../Card";
 
 import styles from "./CardList.module.scss";
-
-type CardListType = {
-    cardList: CardTypes[];
-}
+import {CardListType}  from "../../utils/@globalTypes";
 
 const CardList: FC<CardListType> = ({cardList}) => {
     return cardList.length > 0 ? (

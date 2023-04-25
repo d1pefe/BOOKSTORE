@@ -1,8 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {RootState} from "../store";
-import {CardTypes} from "../../components/Card";
-import {SinglePageTypes} from "../../pages/SinglePage/SinglePage";
+import {CardTypes, GetSearchedPostsPayload, SetSearchedPostsPayload, SinglePageTypes} from "../../utils/@globalTypes";
 
 type InitialType = {
     postsList: CardTypes[];
@@ -14,16 +13,6 @@ type InitialType = {
     selectedPost: string | null;
     isVisibleSelectedModal: boolean;
 };
-
-export type GetSeachedPostsPayload = {
-    page: number,
-    query: string,
-}
-
-export type SetSearchedPostsPayload = {
-    cardList: CardTypes[],
-    postCounter: number,
-}
 
 const initialState: InitialType = {
     postsList: [],
@@ -64,7 +53,7 @@ const postSlice = createSlice({
         state.favoritePosts.splice(favoritesIndex, 1);
       }
     },
-    getSearchedPosts: (_, __: PayloadAction<GetSeachedPostsPayload>) => {},
+    getSearchedPosts: (_, __: PayloadAction<GetSearchedPostsPayload>) => {},
     setSearchedValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },

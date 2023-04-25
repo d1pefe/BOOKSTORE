@@ -1,8 +1,9 @@
 import React from "react";
 
 import styles from "./Cart.module.scss";
-import {useSelector } from "react-redux";
 import BooksInCartList from "../../components/BooksInCartList";
+
+import {useSelector } from "react-redux";
 import {CartSelectors} from "../../redux/reducers/cartSlice";
 
 const Cart = () => {
