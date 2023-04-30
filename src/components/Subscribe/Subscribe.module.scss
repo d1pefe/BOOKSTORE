@@ -4,6 +4,9 @@
 .container {
   background-color: $purple;
   padding: 56px 64px;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 }
 
 .title {

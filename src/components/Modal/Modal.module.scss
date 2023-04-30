@@ -1,0 +1,29 @@
+@import "../../assets/colors";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  background-color: $white;
+  position: absolute;
+  top: calc(50% - 350px);
+  left: calc(50% - 500px);
+  padding: 50px;
+  width: 900px;
+  height: 675px;
+  display: flex;
+  flex-direction: column;
+
+  iframe {
+    height: 675px;
+    width: 100%;
+  }
+}

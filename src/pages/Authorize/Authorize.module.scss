@@ -1,0 +1,35 @@
+@import "../../assets/colors";
+@import "../../assets/fonts";
+
+.wrapper {
+  margin: 0 auto 100px;
+  border: 1px solid $gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 544px;
+  padding: 20px 0 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.authTabs {
+  padding-left: 40px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.input {
+  width: 100%;
+}
+
+.button {
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+

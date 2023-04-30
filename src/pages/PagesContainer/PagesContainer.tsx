@@ -1,10 +1,35 @@
 import React from "react";
 
-import {Outlet} from "react-router-dom";
 import styles from "./PagesContainer.module.scss";
+
 import Header from "./Header";
 
+import {useAuth} from "../../hooks/useAuth";
+import {useDispatch} from "react-redux";
+import {removeUser} from "../../redux/reducers/userSlice";
+
+import {RoutesList} from "../Router";
+import {Outlet, useNavigate} from "react-router-dom";
+import {removePosts} from "../../redux/reducers/postSlice";
+import {removeAllCart} from "../../redux/reducers/cartSlice";
+import {getAuth, signOut} from "firebase/auth";
+
 const PagesContainer = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {isLoggedIn} = useAuth();
+    const auth = getAuth();
+    const onLogOutClick = () => {
+        signOut(auth).then(() => {
+            dispatch(removeUser());
+            dispatch(removePosts());
+            dispatch(removeAllCart())
+            navigate(RoutesList.Authorize);
+        }).catch((error) => {
+            console.log(error)
+        });
+    };
+
     return (
         <div className={styles.container}>
             <div>
@@ -17,7 +42,10 @@ const PagesContainer = () => {
                 <hr/>
                 <div className={styles.footer}>
                     <div>©2022 Bookstore</div>
-                    <div>All rights reserved</div>
+                    <div>
+                        <div>All rights reserved</div>
+                        {isLoggedIn ? <div onClick={onLogOutClick}>Log Out</div> : null}
+                    </div>
                 </div>
             </div>
         </div>

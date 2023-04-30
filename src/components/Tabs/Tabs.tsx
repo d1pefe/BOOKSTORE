@@ -1,51 +1,22 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import classNames from "classnames";
 
 import styles from "./Tabs.module.scss";
+import {TabsProps} from "../../utils/@globalTypes";
 
 export enum TabsNames {
-  DESCRIPTION,
-  AUTHORS,
-  REVIEWS,
+    DESCRIPTION,
+    AUTHORS,
+    REVIEWS,
+    SING_IN,
+    SING_UP,
 }
 
-// const TABS_LIST = [
-//   {
-//     key: TabsNames.DESCRIPTION,
-//     title: "Description",
-//     disabled: false,
-//   },
-//   {
-//     key: TabsNames.AUTHORS,
-//     title: "Authors",
-//     disabled: false,
-//   },
-//   {
-//     key: TabsNames.REVIEWS,
-//     title: "Reviews",
-//     disabled: true,
-//   },
-// ];
-
-type TabType = {
-  key: TabsNames;
-  title: string;
-  disabled: boolean;
-};
-
-type TabsProps = {
-  data: TabType[];
-};
-
-const Tabs: FC<TabsProps> = ({ data }) => {
-  const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
-
-  const onTabClick = (key: TabsNames) => {
-    return () => setActiveTab(key);
-  };
+const Tabs: FC<TabsProps> = ({ data, onClick, activeTab, className }) => {
+  const onTabClick = (key: TabsNames) => () => onClick(key);
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       {data.map((tab) => {
         return (
           <div
@@ -55,7 +26,9 @@ const Tabs: FC<TabsProps> = ({ data }) => {
               [styles.disabledTab]: tab.disabled,
             })}
             onClick={
-              tab.disabled || activeTab === tab.key ? undefined : onTabClick(tab.key)
+              tab.disabled || activeTab === tab.key
+                ? undefined
+                : onTabClick(tab.key)
             }
           >
             {tab.title}

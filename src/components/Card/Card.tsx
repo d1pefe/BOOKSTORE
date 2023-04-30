@@ -1,22 +1,30 @@
 import React, { FC } from "react";
-import {CardTypes} from "./types";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Card.module.scss";
+import { CardsType } from "../../utils/@globalTypes";
 
-const Card: FC<CardTypes> = ({ title, subtitle, isbn13, price, image, url }) => {
+const Card: FC<CardsType> = ({ card }) => {
+  const navigate = useNavigate();
+
+  const onCardClick = () => {
+    navigate(`/books/${card.isbn13}`);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.background}>
-        <div className={styles.img}>
-          <img src={image} alt={title} />
+        <div className={styles.img} onClick={onCardClick}>
+          <img src={card.image} alt={card.title} />
         </div>
       </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.author}>{subtitle}</div>
-      <div className={styles.cost}>{price}</div>
+      <div className={styles.title} onClick={onCardClick}>
+        {card.title}
+      </div>
+      <div className={styles.author}>{card.subtitle}</div>
+      <div className={styles.cost}>{card.price}</div>
     </div>
   );
 };
-
 
 export default Card;

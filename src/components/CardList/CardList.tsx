@@ -1,20 +1,15 @@
-import React, {FC} from "react";
-import Card, { CardTypes }  from "../Card";
+import React, { FC } from "react";
+import Card  from "../Card";
 
 import styles from "./CardList.module.scss";
-
-type CardListType = {
-    cardList: CardTypes[];
-}
+import {CardListType}  from "../../utils/@globalTypes";
 
 const CardList: FC<CardListType> = ({cardList}) => {
     return cardList.length > 0 ? (
         <div className={styles.container}>
-            {cardList.map((card: any, index) => {
-                return (<Card key={index+"_card"} title={card.title} image={card.image}
-                              subtitle={card.subtitle} price={card.price} isbn13={card.isbn13} url={card.url}/>)
+            {cardList.map((card: any) => {
+                return (<Card card={card} key={card.isbn13}/>)
             })}
-            <hr/>
         </div>
     ): null;
 };

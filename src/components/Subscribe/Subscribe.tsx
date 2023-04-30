@@ -1,16 +1,14 @@
-import React, {FC, useState} from "react";
+import React, { FC, useState } from "react";
 import classNames from "classnames";
 
 import styles from "./Subscribe.module.scss";
+import { SubscribeType } from "../../utils/@globalTypes";
+
 import Title from "../Title";
 import Input from "../Input";
 import Button, { ButtonTypes } from "../Button";
 
-type SubscribeType = {
-    className?: string;
-}
-
-const Subscribe: FC<SubscribeType> = ({className}) => {
+const Subscribe: FC<SubscribeType> = ({ className }) => {
   const [email, setEmail] = useState("");
   const onChangeEmail = () => {
     setEmail(email);
@@ -27,6 +25,7 @@ const Subscribe: FC<SubscribeType> = ({className}) => {
         <Input
           placeholder={"Your email"}
           inputType={"email"}
+          value={email}
           onChange={onChangeEmail}
           className={styles.input}
         />

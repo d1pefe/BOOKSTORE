@@ -1,0 +1,59 @@
+@import "../../assets/colors";
+@import "../../assets/fonts";
+
+.arrow {
+  width: 50px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-bottom: 48px;
+}
+
+.secondaryTitle {
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 16px;
+}
+
+.emailInput {
+  width: 95%;
+  margin-bottom: 20px;
+}
+
+.passInput {
+  width: 45%;
+  margin-bottom: 15px;
+}
+
+.newPassInput {
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.newPass {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 32px;
+  padding: 15px 0 0 0;
+
+  .button {
+    width: 256px;
+    padding: 18px 0 14px;
+
+    &_cancel {
+      width: 256px;
+      padding: 18px 0 14px;
+      color: #313037;
+      background: transparent;
+      border: 1px solid #E7E7E7;
+    }
+  }
+}
+
+
