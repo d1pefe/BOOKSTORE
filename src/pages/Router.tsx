@@ -13,12 +13,14 @@ import Cart from "./Cart";
 import Search from "./Search";
 import EmptyState from "../components/EmptyState";
 import Account from "./Account";
+import ResetPassword from "./ResetPassword";
 
 export enum RoutesList {
     Main = "/",
     Search = "/main/search",
     Book = "/books/:id",
     Authorize = "/authorize",
+    Reset = "/reset-password",
     Account = "/account",
     Cart = "/cart",
     Favorites = "/favorites",
@@ -35,6 +37,7 @@ const Router = () => {
                 <Route path={RoutesList.Book} element={<SinglePage/>}/>
                 <Route path={RoutesList.Search} element={<Search/>}/>
                 <Route path={RoutesList.Account} element={isLoggedIn ? <Account /> : <Navigate to={RoutesList.Authorize} />}/>
+                <Route path={RoutesList.Reset} element={<ResetPassword />} />
                 <Route path={RoutesList.Cart} element={isLoggedIn ? <Cart /> : <Navigate to={RoutesList.Authorize} />}/>
                 <Route path={RoutesList.Favorites} element={isLoggedIn ? <Favorites/> : <Navigate to={RoutesList.Authorize}/>}/>
                 <Route path={RoutesList.Default} element={<EmptyState/>}/>

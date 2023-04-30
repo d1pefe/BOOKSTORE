@@ -1,122 +1,59 @@
 @import "../../assets/colors";
 @import "../../assets/fonts";
 
-.titleBlock {
+.arrow {
+  width: 50px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-bottom: 48px;
+}
+
+.secondaryTitle {
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 16px;
+}
+
+.emailInput {
+  width: 95%;
+  margin-bottom: 20px;
+}
+
+.passInput {
+  width: 45%;
+  margin-bottom: 15px;
+}
+
+.newPassInput {
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.newPass {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.buttonWrapper {
   display: flex;
-  flex-direction: column;
-  align-items: baseline;
+  justify-content: flex-end;
+  gap: 32px;
+  padding: 15px 0 0 0;
 
-  .title {
-    margin: 32px 0 48px;
+  .button {
+    width: 256px;
+    padding: 18px 0 14px;
+
+    &_cancel {
+      width: 256px;
+      padding: 18px 0 14px;
+      color: #313037;
+      background: transparent;
+      border: 1px solid #E7E7E7;
+    }
   }
 }
 
-.mainInfoContainer {
-  display: flex;
-  gap: 120px;
 
-  .imageContainer {
-    width: 544px;
-    height: 472px;
-    background-color: $orange;
-    padding: 0;
-    position:relative;
-    display: flex;
-
-    img {
-      margin: auto;
-      width: 350px;
-      height: 400px;
-    }
-
-    & > .buttonLike {
-      position:absolute;
-      top: 0;
-      right: 0;
-
-      &> svg > path {
-        stroke: $white;
-        &:hover {
-          stroke: $red !important;
-        }
-      }
-    }
-
-    .activeButtonLike > svg > path {
-      fill: $red;
-      stroke: $red;
-    }
-  }
-
-  .infoContainer {
-    .priceContainer{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .infoWrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 99px;
-
-      .infoWrapperBlock {
-        display: flex;
-        justify-content: space-between;
-
-        .infoName {
-          font-family: 'Helios', serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 32px;
-          color: $secondary;
-        }
-
-        .info {
-          font-family: 'Helios', serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 32px;
-          color: $primary;
-        }
-      }
-    }
-
-    .preview {
-      font-family: 'Helios', serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-    }
-  }
-
-  margin-bottom: 72px;
-}
-
-.secondaryInfo {
-  .description {
-    margin: 50px 0 50px;
-  }
-
-  .share {
-    width: 120px;
-    display: flex;
-    justify-content: space-between;
-  }
-  margin-bottom: 72px;
-}
-
-.similar {
-  margin: 72px 0 82px;
-  .similarTitle {
-     margin-bottom: 48px;
-  }
-}

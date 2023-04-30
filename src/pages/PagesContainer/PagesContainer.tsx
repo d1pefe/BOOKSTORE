@@ -12,16 +12,22 @@ import {RoutesList} from "../Router";
 import {Outlet, useNavigate} from "react-router-dom";
 import {removePosts} from "../../redux/reducers/postSlice";
 import {removeAllCart} from "../../redux/reducers/cartSlice";
+import {getAuth, signOut} from "firebase/auth";
 
 const PagesContainer = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {isLoggedIn} = useAuth();
+    const auth = getAuth();
     const onLogOutClick = () => {
-        dispatch(removeUser());
-        dispatch(removePosts());
-        dispatch(removeAllCart())
-        navigate(RoutesList.Authorize);
+        signOut(auth).then(() => {
+            dispatch(removeUser());
+            dispatch(removePosts());
+            dispatch(removeAllCart())
+            navigate(RoutesList.Authorize);
+        }).catch((error) => {
+            console.log(error)
+        });
     };
 
     return (
