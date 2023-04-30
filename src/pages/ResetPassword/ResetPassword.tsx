@@ -14,8 +14,6 @@ const ResetPassword = () => {
     const [email, setEmail] = useState("");
 
     const [resetVisible, setResetVisible] = useState(false)
-    const [resetError, setResetError] = useState("")
-
 
     const auth = getAuth();
     const onResetButtonClick = () => {
