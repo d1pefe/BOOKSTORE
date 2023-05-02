@@ -21,13 +21,13 @@ import {RoutesList} from "../Router";
 
 const TABS_LIST = [
     {
-        key: TabsNames.SING_IN,
-        title: "SING IN",
+        key: TabsNames.SIGN_IN,
+        title: "SIGN IN",
         disabled: false,
     },
     {
-        key: TabsNames.SING_UP,
-        title: "SING UP",
+        key: TabsNames.SIGN_UP,
+        title: "SIGN UP",
         disabled: false,
     },
 ];
@@ -36,7 +36,7 @@ const Authorize = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [activeTab, setActiveTab] = useState(TabsNames.SING_IN);
+    const [activeTab, setActiveTab] = useState(TabsNames.SIGN_IN);
 
     const onTabClick = (key: TabsNames) => setActiveTab(key);
 
@@ -84,7 +84,7 @@ const Authorize = () => {
                                 token: user.refreshToken,
                             })
                         );
-                        setActiveTab(TabsNames.SING_IN);
+                        setActiveTab(TabsNames.SIGN_IN);
                         setEmail("");
                         setPass("");
                         setName("");
@@ -163,7 +163,7 @@ const Authorize = () => {
 
     const getAuthorizeForm = () => {
         switch (activeTab) {
-            case TabsNames.SING_IN:
+            case TabsNames.SIGN_IN:
                 return (
                     <div>
                         <Input
@@ -185,7 +185,7 @@ const Authorize = () => {
                         <span onClick={onForgotClick}>Forgot password?</span>
                     </div>
                 );
-            case TabsNames.SING_UP:
+            case TabsNames.SIGN_UP:
                 return (
                     <div>
                         <Input
@@ -240,14 +240,14 @@ const Authorize = () => {
                 />
                 {getAuthorizeForm()}
                 <Button
-                    title={activeTab === TabsNames.SING_IN ? "SING IN" : "SING UP"}
+                    title={activeTab === TabsNames.SIGN_IN ? "SIGN IN" : "SIGN UP"}
                     onClick={
-                        activeTab === TabsNames.SING_IN
+                        activeTab === TabsNames.SIGN_IN
                             ? () => handleLogin(email, pass)
                             : () => handleSingUp(email, pass)
                     }
                     disabled={
-                        activeTab === TabsNames.SING_IN ? !isValidSingIn : !isValidSingUp
+                        activeTab === TabsNames.SIGN_IN ? !isValidSingIn : !isValidSingUp
                     }
                     types={ButtonTypes.Main}
                     className={styles.button}

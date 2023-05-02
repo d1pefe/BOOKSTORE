@@ -8,8 +8,8 @@ export enum TabsNames {
     DESCRIPTION,
     AUTHORS,
     REVIEWS,
-    SING_IN,
-    SING_UP,
+    SIGN_IN,
+    SIGN_UP,
 }
 
 const Tabs: FC<TabsProps> = ({ data, onClick, activeTab, className }) => {
