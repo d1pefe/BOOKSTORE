@@ -8,6 +8,7 @@ import {ArrowLeftIcon} from "../../assets/icons";
 import Button, {ButtonTypes} from "../../components/Button";
 import {useNavigate} from "react-router-dom";
 import FavoriteCard from "../../components/FavoriteCard";
+import EmptyState from "../../components/EmptyState";
 
 const Favorites = () => {
     const favorites = useSelector(PostSelectors.getFavorites);
@@ -19,18 +20,18 @@ const Favorites = () => {
 
     return (
         <div className={styles.wrapper}>
-            {favorites.length > 0 &&
-                <div className={styles.container}>
+            <div className={styles.container}>
                 <Button
                     title={<ArrowLeftIcon/>}
                     onClick={goBack}
                     types={ButtonTypes.Arrow}
                     className={styles.arrow}
                 />
-                {favorites.map((data: any) => {
+                {favorites.length > 0 ?
+                favorites.map((data: any) => {
                     return <FavoriteCard data={data}/>;
-                })}
-            </div>}
+                }) : <EmptyState />}
+            </div>
         </div>
     );
 };

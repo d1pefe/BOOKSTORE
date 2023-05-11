@@ -11,6 +11,9 @@
   img {
     width: 400px;
     height: 300px;
+    &:hover {
+      transform: none;
+    }
   }
   .secondary {
     font-family: 'Helios', serif;

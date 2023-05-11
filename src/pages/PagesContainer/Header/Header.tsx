@@ -136,7 +136,7 @@ const Header = () => {
                             placeholder={"Search"}
                             onChange={setSearchText}
                             className={styles.searchInput}
-                            onKeyDown={onKeyDown}
+                            onKeyDown={searchText.length > 0 ? onKeyDown : () => {}}
                         />
                         <div className={styles.searchIcon} onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
                             <SearchIcon />
