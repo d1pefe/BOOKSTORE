@@ -18,6 +18,14 @@ const Cart = () => {
         navigate(-1);
     };
 
+    const price = cartList.reduce((accumulator, item) => {
+        if (item?.count) {
+            return accumulator + item?.count * +item?.data.price.substring(1);
+        }
+        return accumulator;
+    }, 0);
+    const vat = price * 0.2;
+
     return (
         <div className={styles.wrapper}>
             {cartList.length > 0 && (
@@ -31,11 +39,27 @@ const Cart = () => {
                     {cartList.map(({count, data}) => {
                         return <BooksInCartList data={data} count={count}/>;
                     })}
-
+                    </div>
+    )}
+            <div className={styles.mainPriceContainer}>
+                <div className={styles.PriceAndVatContainer}>
+                    <div className={styles.priceContainer}>
+                        <div className={styles.priceTitle}>Sum total</div>
+                        <div className={styles.price}>{`$ ${price.toFixed(2)}`}</div>
+                    </div>
+                    <div className={styles.priceContainer}>
+                        <div className={styles.priceTitle}>VAT</div>
+                        <div className={styles.price}>{`$ ${vat.toFixed(2)}`}</div>
+                    </div>
                 </div>
-            )}
-        </div>
-    );
+                <div className={styles.priceContainer}>
+                    <div className={styles.total}>total:</div>
+                    <div className={styles.totalSum}>{`$${(price + vat).toFixed(
+                        2
+                    )}`}</div>
+                </div>
+            </div>
+        </div>)
 };
 
 export default Cart;

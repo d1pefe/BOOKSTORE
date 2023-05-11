@@ -88,15 +88,18 @@ const Header = () => {
                         />
                         <hr/>
                         <div className={styles.menuContainer}>
-                            <Input
-                                value={searchText}
-                                inputType={"text"}
-                                placeholder={"Search"}
-                                onChange={setSearchText}
-                                className={styles.searchBurgerInput}
-                            />
-                            <div onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
-                                <SearchIcon />
+                            <div className={styles.inputWithSearchButtonMobile}>
+                                <Input
+                                    value={searchText}
+                                    inputType={"text"}
+                                    placeholder={"Search"}
+                                    onChange={setSearchText}
+                                    className={styles.searchInputMobile}
+                                    onKeyDown={onKeyDown}
+                                />
+                                <div className={styles.searchIconMobile} onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
+                                    <SearchIcon />
+                                </div>
                             </div>
                             <Button
                                 title={"FAVORITES"}
@@ -126,16 +129,18 @@ const Header = () => {
                     <div onClick={onHeadButtonClick}>
                         <ShopIcon/>
                     </div>
-                    <Input
-                        value={searchText}
-                        inputType={"text"}
-                        placeholder={"Search"}
-                        onChange={setSearchText}
-                        className={styles.searchInput}
-                        onKeyDown={onKeyDown}
-                    />
-                    <div onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
-                        <SearchIcon />
+                    <div className={styles.inputWithSearchButton}>
+                        <Input
+                            value={searchText}
+                            inputType={"text"}
+                            placeholder={"Search"}
+                            onChange={setSearchText}
+                            className={styles.searchInput}
+                            onKeyDown={onKeyDown}
+                        />
+                        <div className={styles.searchIcon} onClick={searchText.length > 0 ? onSearchButtonClick : () => {}}>
+                            <SearchIcon />
+                        </div>
                     </div>
                     <div className={styles.iconsContainer}>
                         <div className={styles.likeIcon} onClick={onLikeButtonClick}>

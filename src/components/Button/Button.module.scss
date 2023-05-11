@@ -76,6 +76,9 @@
   background-color: $secondary;
 
   &:hover {
-    color: $white;
+    & > svg > path {
+      fill: $secondary;
+      stroke: $white;
+    }
   }
 }

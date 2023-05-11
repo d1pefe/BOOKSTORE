@@ -10,13 +10,15 @@
 
 }
 
-.background {
-  background-color: $blue;
-}
-
 img {
   height: 264px;
   width: 226px;
+
+  &:hover {
+    cursor: pointer;
+    -ms-transform: rotateZ(10deg);
+    transform: rotateZ(10deg);
+  }
 }
 
 .title {

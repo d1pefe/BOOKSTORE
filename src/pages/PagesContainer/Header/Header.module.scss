@@ -11,15 +11,27 @@
   }
 }
 
+.inputWithSearchButton {
+  position: relative;
+}
+
 .searchInput {
-  padding-right: 348px !important;
-  @media (max-width: 1000px) {
-    padding-right: 248px !important;
+  width: 542px;
+  &:focus {
+    background-color: $gray;
+    padding: 11.5px 17px 10px !important;
   }
-  @media (max-width: 900px) {
-    padding-right: 200px !important;
+  @media screen and (max-width: 920px) {
+    display: none;
   }
-  @media (max-width: 836px) {
+}
+
+.searchIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 13px;
+  top: 18px;
+  @media screen and (max-width: 920px) {
     display: none;
   }
 }
@@ -94,15 +106,31 @@ hr {
     align-items: center;
     height: 412px;
 
-    .searchBurgerInput {
-      margin-top: 36px;
-      width: 287px;
+    .inputWithSearchButtonMobile {
+      position: relative;
     }
 
-    .burgerButtonFromIcon {
-      background-color: $white;
-      color: $primary;
-      margin-top: 36px
+    .searchInputMobile {
+      width: 542px;
+      &:focus {
+        background-color: $gray;
+        padding: 11.5px 17px 10px !important;
+      }
+      @media screen and (min-width: 768px) and (max-width: 1149px) {
+        width: 287px;
+        height: 56px;
+      }
+      @media screen and (min-width: 320px) and (max-width: 767px) {
+        width: 271px;
+        height: 56px;
+      }
+    }
+
+    .searchIconMobile {
+      cursor: pointer;
+      position: absolute;
+      right: 13px;
+      top: 18px;
     }
   }
 }

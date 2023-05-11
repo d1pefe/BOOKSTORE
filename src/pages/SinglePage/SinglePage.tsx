@@ -82,6 +82,9 @@ const SinglePage = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
 
+    const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
   const [activeTab, setActiveTab] = useState(TabsNames.DESCRIPTION);
   const onTabClick = (key: TabsNames) => setActiveTab(key);
 
@@ -138,7 +141,7 @@ const SinglePage = () => {
         <Title title={data.title} className={styles.title} />
       </div>
       <div className={styles.mainInfoContainer}>
-        <div className={styles.imageContainer}>
+        <div className={styles.imageContainer} style={{backgroundColor : randomColor}}>
           <img src={data.image} alt={data.title} />
           <Button
             title={<LikeIcon />}

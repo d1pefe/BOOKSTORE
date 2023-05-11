@@ -21,7 +21,7 @@ const Input: FC<InputProps> = ({
 
   return (
     <div className={styles.inputWrapper}>
-      <p className={styles.inputTitle}>{title}</p>
+        {title && <p className={styles.inputTitle}>{title}</p>}
       <input
         type={inputType}
         className={classNames(

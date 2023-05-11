@@ -4,7 +4,6 @@ import classNames from "classnames";
 import styles from "./Subscribe.module.scss";
 import { SubscribeType } from "../../utils/@globalTypes";
 
-import Title from "../Title";
 import Input from "../Input";
 import Button, { ButtonTypes } from "../Button";
 
@@ -16,12 +15,12 @@ const Subscribe: FC<SubscribeType> = ({ className }) => {
 
   return (
     <div className={classNames(styles.container, className)}>
-      <Title title={"Subscribe to Newsletter"} className={styles.title} />
-      <div className={styles.paragraph}>
+      <div className={styles.title}>Subscribe to Newsletter</div>
+      <div className={styles.description}>
         Be the first to know about new IT books, upcoming releases, exclusive
         offers and more.
       </div>
-      <div className={styles.inputContainer}>
+      <div className={styles.inputButtonContainer}>
         <Input
           placeholder={"Your email"}
           inputType={"email"}
